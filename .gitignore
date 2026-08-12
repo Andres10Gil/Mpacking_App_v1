@@ -1,0 +1,77 @@
+# ============================================
+# MPACKING - Archivos excluidos del control de versiones
+# ============================================
+
+# --- CREDENCIALES (nunca versionar) ---
+appsettings.Development.json
+appsettings.Local.json
+.env
+.env.local
+*.pfx
+*.key
+secrets.json
+google-services.json
+GoogleService-Info.plist
+
+# --- .NET / ASP.NET Core ---
+bin/
+obj/
+out/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+
+# --- Node / React Native ---
+node_modules/
+npm-debug.log*
+yarn-error.log*
+.expo/
+.expo-shared/
+dist/
+build/
+*.jsbundle
+
+# --- Android ---
+*.apk
+*.aab
+*.keystore
+android/app/build/
+android/.gradle/
+local.properties
+
+# --- iOS ---
+ios/Pods/
+ios/build/
+*.xcworkspace
+*.xcuserdatad/
+
+# --- Base de datos ---
+*.backup
+*.dump
+dump.sql
+
+# --- Editores ---
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# --- Sistema operativo ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Temporales ---
+*.tmp
+*.log
+*.bak
+~$*.docx
+~$*.xlsx
+~$*.pptx
