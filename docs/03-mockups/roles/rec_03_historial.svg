@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="375" height="812" viewBox="0 0 375 812" xmlns="http://www.w3.org/2000/svg">
+<defs><style>text{font-family:-apple-system,'SF Pro Display',Arial,sans-serif;dominant-baseline:auto}</style></defs>
+<rect width="375" height="812" fill="#F4F7F2"/>
+<rect x="0" y="0" width="375" height="44" fill="#E65100"/>
+<text x="20" y="30" font-size="12" font-weight="600" fill="#FFFFFF">9:41</text>
+<text x="355" y="30" font-size="11" fill="#FFFFFF" text-anchor="end">●●● 100%</text>
+<rect x="127" y="8" width="120" height="28" rx="14" fill="#1a1a1a"/>
+<rect x="0" y="44" width="375" height="56" fill="#E65100"/>
+
+<text x="187" y="72" font-size="18" font-weight="700" fill="#FFFFFF" text-anchor="middle">Mis Recolecciones</text>
+<text x="187" y="90" font-size="13" fill="#C0DD97" text-anchor="middle">Junio 2025</text>
+<rect x="16" y="110" width="343" height="62" rx="12" fill="#E65100"/>
+<text x="30" y="130" font-size="11" font-weight="normal" fill="#FFCCBC" text-anchor="start">Total recol. este mes</text>
+<text x="30" y="158" font-size="22" font-weight="800" fill="#FFFFFF">342 kg · 6,840 ecp generados</text>
+<rect x="16" y="186" width="343" height="60" rx="12" fill="#FFFFFF" stroke="#C0DD97" stroke-width="0.5"/>
+<text x="30" y="222" font-size="22">♻️</text>
+<text x="62" y="206" font-size="12" font-weight="700" fill="#111" text-anchor="start">Juan García</text>
+<text x="62" y="222" font-size="11" font-weight="normal" fill="#9E9E9E" text-anchor="start">PET · 1.5 kg</text>
+<text x="62" y="236" font-size="10" font-weight="normal" fill="#9E9E9E" text-anchor="start">10:32 am · Cra 15 #72</text>
+<rect x="285" y="200" width="65" height="22" rx="6" fill="#EAF3DE"/><text x="317" y="215" font-size="11" font-weight="700" fill="#1B6B3A" text-anchor="middle">+75 ecp</text>
+<rect x="285" y="226" width="30" height="22" rx="6" fill="#D4EDDA"/><text x="300" y="241" font-size="11" font-weight="700" fill="#155724" text-anchor="middle">OK</text><rect x="16" y="254" width="343" height="60" rx="12" fill="#FFFFFF" stroke="#C0DD97" stroke-width="0.5"/>
+<text x="30" y="290" font-size="22">♻️</text>
+<text x="62" y="274" font-size="12" font-weight="700" fill="#111" text-anchor="start">María López</text>
+<text x="62" y="290" font-size="11" font-weight="normal" fill="#9E9E9E" text-anchor="start">Cartón · 3.2 kg</text>
+<text x="62" y="304" font-size="10" font-weight="normal" fill="#9E9E9E" text-anchor="start">9:58 am · Calle 68 #8</text>
+<rect x="285" y="268" width="65" height="22" rx="6" fill="#EAF3DE"/><text x="317" y="283" font-size="11" font-weight="700" fill="#1B6B3A" text-anchor="middle">+96 ecp</text>
+<rect x="285" y="294" width="30" height="22" rx="6" fill="#D4EDDA"/><text x="300" y="309" font-size="11" font-weight="700" fill="#155724" text-anchor="middle">OK</text><rect x="16" y="322" width="343" height="60" rx="12" fill="#FFFFFF" stroke="#C0DD97" stroke-width="0.5"/>
+<text x="30" y="358" font-size="22">♻️</text>
+<text x="62" y="342" font-size="12" font-weight="700" fill="#111" text-anchor="start">Pedro Silva</text>
+<text x="62" y="358" font-size="11" font-weight="normal" fill="#9E9E9E" text-anchor="start">Aluminio · 0.8 kg</text>
+<text x="62" y="372" font-size="10" font-weight="normal" fill="#9E9E9E" text-anchor="start">9:21 am · Av. 19 #103</text>
+<rect x="285" y="336" width="72" height="22" rx="6" fill="#EAF3DE"/><text x="321" y="351" font-size="11" font-weight="700" fill="#1B6B3A" text-anchor="middle">+160 ecp</text>
+<rect x="285" y="362" width="30" height="22" rx="6" fill="#D4EDDA"/><text x="300" y="377" font-size="11" font-weight="700" fill="#155724" text-anchor="middle">OK</text><rect x="16" y="390" width="343" height="60" rx="12" fill="#FFFFFF" stroke="#C0DD97" stroke-width="0.5"/>
+<text x="30" y="426" font-size="22">♻️</text>
+<text x="62" y="410" font-size="12" font-weight="700" fill="#111" text-anchor="start">Ana Torres</text>
+<text x="62" y="426" font-size="11" font-weight="normal" fill="#9E9E9E" text-anchor="start">HDPE · 2.1 kg</text>
+<text x="62" y="440" font-size="10" font-weight="normal" fill="#9E9E9E" text-anchor="start">Ayer · 3:15 pm</text>
+<rect x="285" y="404" width="65" height="22" rx="6" fill="#EAF3DE"/><text x="317" y="419" font-size="11" font-weight="700" fill="#1B6B3A" text-anchor="middle">+84 ecp</text>
+<rect x="285" y="430" width="30" height="22" rx="6" fill="#D4EDDA"/><text x="300" y="445" font-size="11" font-weight="700" fill="#155724" text-anchor="middle">OK</text><rect x="16" y="458" width="343" height="60" rx="12" fill="#FFFFFF" stroke="#C0DD97" stroke-width="0.5"/>
+<text x="30" y="494" font-size="22">♻️</text>
+<text x="62" y="478" font-size="12" font-weight="700" fill="#111" text-anchor="start">Luis Mora</text>
+<text x="62" y="494" font-size="11" font-weight="normal" fill="#9E9E9E" text-anchor="start">PET · 0.9 kg</text>
+<text x="62" y="508" font-size="10" font-weight="normal" fill="#9E9E9E" text-anchor="start">Ayer · 2:40 pm</text>
+<rect x="285" y="472" width="65" height="22" rx="6" fill="#EAF3DE"/><text x="317" y="487" font-size="11" font-weight="700" fill="#1B6B3A" text-anchor="middle">+45 ecp</text>
+<rect x="285" y="498" width="30" height="22" rx="6" fill="#D4EDDA"/><text x="300" y="513" font-size="11" font-weight="700" fill="#155724" text-anchor="middle">OK</text>
+<rect x="0" y="736" width="375" height="76" fill="#FFFFFF"/>
+<line x1="0" y1="736" x2="375" y2="736" stroke="#C0DD97" stroke-width="0.5"/>
+<text x="46" y="760" font-size="22" text-anchor="middle" fill="#9E9E9E">🏠</text><text x="46" y="782" font-size="10" text-anchor="middle" fill="#9E9E9E" font-weight="400">Inicio</text><text x="139" y="760" font-size="22" text-anchor="middle" fill="#E65100">📋</text><text x="139" y="782" font-size="10" text-anchor="middle" fill="#E65100" font-weight="700">Recolecciones</text><text x="232" y="760" font-size="22" text-anchor="middle" fill="#9E9E9E">📍</text><text x="232" y="782" font-size="10" text-anchor="middle" fill="#9E9E9E" font-weight="400">GPS</text><text x="325" y="760" font-size="22" text-anchor="middle" fill="#9E9E9E">📊</text><text x="325" y="782" font-size="10" text-anchor="middle" fill="#9E9E9E" font-weight="400">Mi stats</text>
+</svg>

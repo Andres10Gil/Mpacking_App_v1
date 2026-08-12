@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="375" height="812" viewBox="0 0 375 812" xmlns="http://www.w3.org/2000/svg">
+<defs><style>text{font-family:-apple-system,'SF Pro Display',Arial,sans-serif;dominant-baseline:auto}</style></defs>
+<rect width="375" height="812" fill="#F4F7F2"/>
+<rect x="0" y="0" width="375" height="44" fill="#E65100"/>
+<text x="20" y="30" font-size="12" font-weight="600" fill="#FFFFFF">9:41</text>
+<text x="355" y="30" font-size="11" fill="#FFFFFF" text-anchor="end">●●● 100%</text>
+<rect x="127" y="8" width="120" height="28" rx="14" fill="#1a1a1a"/>
+<rect x="0" y="44" width="375" height="56" fill="#E65100"/>
+
+<text x="187" y="72" font-size="18" font-weight="700" fill="#FFFFFF" text-anchor="middle">Mi Ruta</text>
+<text x="187" y="90" font-size="13" fill="#C0DD97" text-anchor="middle">Carlos Méndez · Zona Norte</text>
+<rect x="16" y="110" width="343" height="80" rx="12" fill="#E65100"/>
+<text x="30" y="130" font-size="11" font-weight="normal" fill="#FFCCBC" text-anchor="start">Estado GPS</text>
+<rect x="30" y="140" width="65" height="22" rx="6" fill="#BF360C"/><text x="62" y="155" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">EN RUTA</text>
+<text x="30" y="170" font-size="11" font-weight="normal" fill="#FFCCBC" text-anchor="start">Velocidad: 12 km/h  ·  Batería: 84%</text>
+<text x="345" y="156" font-size="28" font-weight="800" fill="#FFFFFF" text-anchor="end">Zona</text>
+<text x="345" y="180" font-size="28" font-weight="800" fill="#FFFFFF" text-anchor="end">Norte</text>
+
+<rect x="16" y="202" width="167" height="72" rx="12" fill="#FFFFFF" stroke="#C0DD97" stroke-width="0.5"/>
+<text x="26" y="222" font-size="11" font-weight="normal" fill="#9E9E9E" text-anchor="start">Recolectado hoy</text>
+<text x="26" y="248" font-size="22" font-weight="800" fill="#E65100" text-anchor="start">42 kg</text>
+<text x="26" y="268" font-size="10" font-weight="normal" fill="#9E9E9E" text-anchor="start">8 visitas</text>
+<rect x="191" y="202" width="167" height="72" rx="12" fill="#FFFFFF" stroke="#C0DD97" stroke-width="0.5"/>
+<text x="201" y="222" font-size="11" font-weight="normal" fill="#9E9E9E" text-anchor="start">Pendientes</text>
+<text x="201" y="248" font-size="22" font-weight="800" fill="#A32D2D" text-anchor="start">3</text>
+<text x="201" y="268" font-size="10" font-weight="normal" fill="#9E9E9E" text-anchor="start">confirmaciones</text>
+
+<rect x="16" y="286" width="343" height="140" rx="12" fill="#FFFFFF" stroke="#C0DD97" stroke-width="0.5"/>
+<text x="30" y="306" font-size="13" font-weight="700" fill="#173404" text-anchor="start">Próxima recolección</text>
+<line x1="16" y1="320" x2="359" y2="320" stroke="#EAF3DE" stroke-width="1"/>
+<text x="30" y="348" font-size="28">📍</text>
+<text x="68" y="338" font-size="13" font-weight="700" fill="#111" text-anchor="start">Cra 15 #72-34, Chapinero</text>
+<text x="68" y="356" font-size="11" font-weight="normal" fill="#9E9E9E" text-anchor="start">Juan García · 2 bolsas PET</text>
+<text x="68" y="372" font-size="11" font-weight="normal" fill="#3B6D11" text-anchor="start">≈ 3 kg estimados</text>
+<rect x="295" y="332" width="51" height="22" rx="6" fill="#EAF3DE"/><text x="320" y="347" font-size="11" font-weight="700" fill="#3B6D11" text-anchor="middle">5 min</text>
+<rect x="16" y="398" width="343" height="48" rx="12" fill="#E65100"/><text x="187" y="427" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">Confirmar llegada</text>
+
+<rect x="16" y="458" width="343" height="52" rx="12" fill="#EAF3DE" stroke="#C0DD97" stroke-width="0.5"/>
+<text x="30" y="478" font-size="12" font-weight="700" fill="#27500A" text-anchor="start">Progreso del día</text>
+<text x="355" y="478" font-size="11" font-weight="normal" fill="#9E9E9E" text-anchor="end">42/60 kg meta</text>
+<rect x="30" y="490" width="315" height="8" rx="3" fill="#EAF3DE"/><rect x="30" y="490" width="220" height="8" rx="3" fill="#E65100"/>
+<text x="30" y="512" font-size="10" font-weight="normal" fill="#9E9E9E" text-anchor="start">70% completado</text>
+<rect x="0" y="736" width="375" height="76" fill="#FFFFFF"/>
+<line x1="0" y1="736" x2="375" y2="736" stroke="#C0DD97" stroke-width="0.5"/>
+<text x="46" y="760" font-size="22" text-anchor="middle" fill="#E65100">🏠</text><text x="46" y="782" font-size="10" text-anchor="middle" fill="#E65100" font-weight="700">Inicio</text><text x="139" y="760" font-size="22" text-anchor="middle" fill="#9E9E9E">📋</text><text x="139" y="782" font-size="10" text-anchor="middle" fill="#9E9E9E" font-weight="400">Recolecciones</text><text x="232" y="760" font-size="22" text-anchor="middle" fill="#9E9E9E">📍</text><text x="232" y="782" font-size="10" text-anchor="middle" fill="#9E9E9E" font-weight="400">GPS</text><text x="325" y="760" font-size="22" text-anchor="middle" fill="#9E9E9E">📊</text><text x="325" y="782" font-size="10" text-anchor="middle" fill="#9E9E9E" font-weight="400">Mi stats</text>
+</svg>
