@@ -1,0 +1,10 @@
+{
+  "ConnectionStrings": {
+    "MpackingDb": "Host=localhost;Port=5432;Database=mpacking_db;Username=postgres;Password=TU_PASSWORD_REAL"
+  },
+  "Jwt": {
+    "Key": "clave-secreta-de-desarrollo-minimo-32-caracteres-aqui",
+    "Issuer": "MPACKING",
+    "Audience": "MPACKING.App"
+  }
+}
