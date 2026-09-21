@@ -35,7 +35,7 @@ public class UsuarioConfig : IEntityTypeConfiguration<Usuario>
             .HasMaxLength(20)
             .HasConversion(
                 v => v.ToString().ToUpperInvariant(),
-                v => Enum.Parse<RolUsuario>(v, ignoreCase: true));
+                v => Enum.Parse<RolUsuario>(v, true));
 
         b.HasIndex(x => x.Correo).IsUnique();
     }
@@ -122,7 +122,7 @@ public class QrConfig : IEntityTypeConfiguration<Qr>
             .HasMaxLength(20)
             .HasConversion(
                 v => v.ToString().ToUpperInvariant(),
-                v => Enum.Parse<EstadoQr>(v, ignoreCase: true));
+                v => Enum.Parse<EstadoQr>(v, true));
 
         b.HasIndex(x => x.CodigoHash).IsUnique();
         b.HasOne(x => x.Restaurante).WithMany().HasForeignKey(x => x.IdRestaurante);
@@ -186,7 +186,7 @@ public class RedencionConfig : IEntityTypeConfiguration<Redencion>
             .HasMaxLength(20)
             .HasConversion(
                 v => v.ToString().ToUpperInvariant(),
-                v => Enum.Parse<EstadoRedencion>(v, ignoreCase: true));
+                v => Enum.Parse<EstadoRedencion>(v, true));
 
         b.HasIndex(x => x.CodigoUnico).IsUnique();
         b.HasOne(x => x.Usuario).WithMany().HasForeignKey(x => x.IdUsuario);
@@ -215,7 +215,7 @@ public class PagoConfig : IEntityTypeConfiguration<Pago>
             .HasMaxLength(20)
             .HasConversion(
                 v => v.ToString().ToUpperInvariant(),
-                v => Enum.Parse<EstadoPago>(v, ignoreCase: true));
+                v => Enum.Parse<EstadoPago>(v, true));
 
         b.HasOne(x => x.Redencion).WithOne().HasForeignKey<Pago>(x => x.IdRedencion);
     }

@@ -1,4 +1,4 @@
-# MPACKING
+# Guía técnica — MPACKING
 
 Sistema de reciclaje con recompensas digitales (ecopesos). Monolito modular en ASP.NET Core 8 sobre PostgreSQL 17.
 
@@ -13,10 +13,8 @@ El usuario escanea un QR impreso en un empaque, el reciclador confirma el peso, 
 | Documentación y requisitos (RF-01 a RF-24) | completo |
 | Base de datos: 12 tablas, 4 triggers, 10 índices | completo y probado |
 | Datos reales cargados | 18 materiales, 8 restaurantes, 1 reciclador, 15 beneficios |
-| Backend | esqueleto generado, **sin compilar todavía** |
-| App móvil | no iniciada |
-
-**Lo primero que hay que hacer:** `dotnet build` y corregir los errores. El código se escribió sin acceso a un compilador.
+| Backend | compila y corre, API probada con Swagger |
+| App móvil | pendiente (React Native, Android) |
 
 ---
 
@@ -159,10 +157,10 @@ Detalles en `docs/RAMAS.md`.
 
 ## Pendiente
 
-- [ ] Compilar y corregir errores
+- [x] Compilar y corregir errores
 - [ ] Probar el flujo de reciclaje contra la base real
 - [ ] Refresh token con persistencia
 - [ ] Controller de administración (RF-16, RF-17)
 - [ ] Reportes ambientales en PDF (RF-24)
 - [ ] Pruebas unitarias
-- [ ] App móvil React Native
+- [ ] App móvil React Native (Android)

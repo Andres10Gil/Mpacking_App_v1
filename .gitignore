@@ -56,9 +56,10 @@ ios/build/
 *.dump
 dump.sql
 
-# --- Editores ---
+# --- Editores / herramientas locales ---
 .idea/
 .vscode/
+CLAUDE.md
 *.swp
 *.swo
 *~
