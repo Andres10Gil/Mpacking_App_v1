@@ -60,6 +60,7 @@ dump.sql
 .idea/
 .vscode/
 CLAUDE.md
+backend/docs/CONEXION_FRONTEND.md
 *.swp
 *.swo
 *~
