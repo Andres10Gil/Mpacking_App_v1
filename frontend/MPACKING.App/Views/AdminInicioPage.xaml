@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MPACKING.App.ViewModels"
+             xmlns:comp="clr-namespace:MPACKING.App.Views.Componentes"
+             x:Class="MPACKING.App.Views.AdminInicioPage"
+             x:DataType="vm:AdminInicioViewModel"
+             BackgroundColor="{StaticResource MpFondoPagina}"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0">
+            <Grid>
+
+                <Border BackgroundColor="{StaticResource MpFondoCampo}"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 0,0,26,26"
+                        HeightRequest="150"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Fill" />
+
+                <VerticalStackLayout Padding="22,36,22,30" Spacing="0">
+
+                    <Label Text="Panel admin"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource MpVerdeTitulo}" />
+                    <Label Text="Resumen del sistema"
+                           FontSize="13"
+                           TextColor="{StaticResource MpVerdeEtiqueta}"
+                           Margin="0,4,0,20" />
+
+                    <!-- KPIs -->
+                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="12">
+                        <Border Grid.Row="0" Grid.Column="0" BackgroundColor="{StaticResource MpFondoCampo}"
+                                Stroke="Transparent" StrokeShape="RoundRectangle 22" HeightRequest="92">
+                            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="2">
+                                <Label Text="{Binding UsuariosActivosTexto}" FontSize="22" FontAttributes="Bold"
+                                       TextColor="{StaticResource MpVerdeTitulo}" HorizontalOptions="Center" />
+                                <Label Text="Usuarios activos" FontSize="11"
+                                       TextColor="{StaticResource MpVerdeEtiqueta}" HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border Grid.Row="0" Grid.Column="1" BackgroundColor="{StaticResource MpAzul}"
+                                Stroke="Transparent" StrokeShape="RoundRectangle 22" HeightRequest="92">
+                            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="2">
+                                <Label Text="{Binding QrEscaneadosTexto}" FontSize="22" FontAttributes="Bold"
+                                       TextColor="{StaticResource MpVerdeTitulo}" HorizontalOptions="Center" />
+                                <Label Text="QR escaneados" FontSize="11"
+                                       TextColor="{StaticResource MpVerdeEtiqueta}" HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border Grid.Row="1" Grid.Column="0" BackgroundColor="{StaticResource MpAmarillo}"
+                                Stroke="Transparent" StrokeShape="RoundRectangle 22" HeightRequest="92">
+                            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="2">
+                                <Label Text="{Binding EcopesosDadosTexto}" FontSize="22" FontAttributes="Bold"
+                                       TextColor="{StaticResource MpVerdeTitulo}" HorizontalOptions="Center" />
+                                <Label Text="Ecopesos dados" FontSize="11"
+                                       TextColor="{StaticResource MpVerdeEtiqueta}" HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border Grid.Row="1" Grid.Column="1" BackgroundColor="{StaticResource MpDurazno}"
+                                Stroke="Transparent" StrokeShape="RoundRectangle 22" HeightRequest="92">
+                            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="2">
+                                <Label Text="{Binding MaterialKgTexto}" FontSize="22" FontAttributes="Bold"
+                                       TextColor="{StaticResource MpVerdeTitulo}" HorizontalOptions="Center" />
+                                <Label Text="Material kg" FontSize="11"
+                                       TextColor="{StaticResource MpVerdeEtiqueta}" HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+
+                    <!-- Alertas -->
+                    <Border BackgroundColor="White"
+                            Stroke="{StaticResource MpBordeTarjetaBrush}"
+                            StrokeThickness="1.5"
+                            StrokeShape="RoundRectangle 22"
+                            Margin="0,16,0,0"
+                            IsVisible="{Binding HayAlertas}">
+                        <VerticalStackLayout Padding="20,16" Spacing="4">
+                            <Label Text="Redenciones por revisar" FontSize="15" FontAttributes="Bold"
+                                   TextColor="{StaticResource MpVerdeTitulo}" Margin="0,0,0,8" />
+
+                            <CollectionView ItemsSource="{Binding Alertas}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="vm:AlertaVm">
+                                        <Grid Padding="0,8" ColumnDefinitions="34,*,Auto" ColumnSpacing="10">
+                                            <Ellipse Grid.Column="0" Fill="{StaticResource MpRosado}"
+                                                     WidthRequest="30" HeightRequest="30" VerticalOptions="Start" />
+                                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                                <Label Text="{Binding Titulo}" FontSize="12" FontAttributes="Bold"
+                                                       TextColor="{StaticResource MpTextoOscuro}" />
+                                                <Label Text="{Binding Detalle}" FontSize="10"
+                                                       TextColor="{StaticResource MpTextoPlaceholder}" />
+                                            </VerticalStackLayout>
+                                            <Label Grid.Column="2" Text="{Binding Etiqueta}" FontSize="10"
+                                                   FontAttributes="Bold" TextColor="{StaticResource MpError}"
+                                                   VerticalOptions="Start" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- CO2 del mes -->
+                    <Border BackgroundColor="White"
+                            Stroke="{StaticResource MpBordeTarjetaBrush}"
+                            StrokeThickness="1.5"
+                            StrokeShape="RoundRectangle 22"
+                            Margin="0,16,0,0">
+                        <VerticalStackLayout Padding="20,18" Spacing="10">
+                            <Label Text="CO2 evitado este mes" FontSize="14" FontAttributes="Bold"
+                                   TextColor="{StaticResource MpVerdeTitulo}" />
+                            <Label Text="{Binding Co2EvitadoMesTexto}" FontSize="22" FontAttributes="Bold"
+                                   TextColor="{StaticResource MpVerdeEtiqueta}" />
+                            <ProgressBar Progress="{Binding ProgresoCo2Mes}"
+                                         ProgressColor="{StaticResource MpVerdeAcento}"
+                                         BackgroundColor="{StaticResource MpDivisor}"
+                                         HeightRequest="10" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Label Text="{Binding MensajeError}"
+                           TextColor="{StaticResource MpError}"
+                           FontSize="12"
+                           Margin="0,12,0,0" />
+
+                    <ActivityIndicator IsRunning="{Binding EstaOcupado}"
+                                       IsVisible="{Binding EstaOcupado}"
+                                       Color="{StaticResource MpVerdeBoton}"
+                                       Margin="0,12,0,0" />
+
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+
+        <comp:BarraInferiorAdmin Grid.Row="1"
+                                  TabActiva="Inicio"
+                                  ComandoInicio="{Binding CargarCommand}"
+                                  ComandoUsuarios="{Binding IrAUsuariosCommand}"
+                                  ComandoReportes="{Binding IrAReportesCommand}"
+                                  ComandoConfig="{Binding IrAConfigCommand}" />
+
+    </Grid>
+</ContentPage>

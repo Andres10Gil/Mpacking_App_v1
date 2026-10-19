@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MPACKING.App.ViewModels"
+             xmlns:comp="clr-namespace:MPACKING.App.Views.Componentes"
+             x:Class="MPACKING.App.Views.InicioPage"
+             x:DataType="vm:InicioViewModel"
+             BackgroundColor="{StaticResource MpFondoPagina}"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0">
+            <Grid>
+
+                <!-- Banda superior -->
+                <Border BackgroundColor="{StaticResource MpFondoCampo}"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 0,0,26,26"
+                        HeightRequest="172"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Fill" />
+
+                <VerticalStackLayout Padding="22,36,22,110" Spacing="0">
+
+                    <Label FontSize="14"
+                           TextColor="{StaticResource MpVerdeEtiqueta}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Hola, " />
+                                <Span Text="{Binding NombreUsuario}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Text="Bienvenido"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource MpVerdeTitulo}"
+                           Margin="0,0,0,20" />
+
+                    <!-- Tarjeta de saldo -->
+                    <Border BackgroundColor="{StaticResource MpVerdeBoton}"
+                            Stroke="Transparent"
+                            StrokeShape="RoundRectangle 26"
+                            Padding="24,22">
+                        <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                            <Label Text="Tus ecopesos"
+                                   TextColor="White"
+                                   FontAttributes="Bold"
+                                   FontSize="12" />
+                            <Label Text="{Binding SaldoTexto}"
+                                   TextColor="White"
+                                   FontAttributes="Bold"
+                                   FontSize="46" />
+                            <Label TextColor="White"
+                                   FontSize="12"
+                                   Margin="0,4,0,0">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="equivale a " />
+                                        <Span Text="{Binding EquivalenteTexto}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Accesos rapidos -->
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10" Margin="0,16,0,0" HeightRequest="96">
+                        <Border Grid.Column="0" BackgroundColor="{StaticResource MpFondoCampo}"
+                                Stroke="Transparent" StrokeShape="RoundRectangle 22">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding IrEscanearCommand}" />
+                            </Grid.GestureRecognizers>
+                            <VerticalStackLayout VerticalOptions="Center" Spacing="8">
+                                <Ellipse Fill="White" WidthRequest="38" HeightRequest="38" HorizontalOptions="Center" />
+                                <Label Text="Escanear" FontSize="12" FontAttributes="Bold"
+                                       TextColor="{StaticResource MpVerdeTitulo}" HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border Grid.Column="1" BackgroundColor="{StaticResource MpAzul}"
+                                Stroke="Transparent" StrokeShape="RoundRectangle 22">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding IrMapaCommand}" />
+                            </Border.GestureRecognizers>
+                            <VerticalStackLayout VerticalOptions="Center" Spacing="8">
+                                <Ellipse Fill="White" WidthRequest="38" HeightRequest="38" HorizontalOptions="Center" />
+                                <Label Text="Ver mapa" FontSize="12" FontAttributes="Bold"
+                                       TextColor="{StaticResource MpVerdeTitulo}" HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border Grid.Column="2" BackgroundColor="{StaticResource MpAmarillo}"
+                                Stroke="Transparent" StrokeShape="RoundRectangle 22">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding IrBilleteraCommand}" />
+                            </Border.GestureRecognizers>
+                            <VerticalStackLayout VerticalOptions="Center" Spacing="8">
+                                <Ellipse Fill="White" WidthRequest="38" HeightRequest="38" HorizontalOptions="Center" />
+                                <Label Text="Redimir" FontSize="12" FontAttributes="Bold"
+                                       TextColor="{StaticResource MpVerdeTitulo}" HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+
+                    <!-- Impacto -->
+                    <Border BackgroundColor="White"
+                            Stroke="{StaticResource MpBordeTarjetaBrush}"
+                            StrokeThickness="1.5"
+                            StrokeShape="RoundRectangle 22"
+                            Margin="0,20,0,0">
+                        <VerticalStackLayout Padding="20,18" Spacing="10">
+                            <Label Text="Tu impacto" FontSize="14" FontAttributes="Bold"
+                                   TextColor="{StaticResource MpVerdeTitulo}" />
+
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0" Text="Reciclado" FontSize="12"
+                                       TextColor="{StaticResource MpTextoPlaceholder}" VerticalOptions="Center" />
+                                <Label Grid.Column="1" Text="{Binding TotalKgTexto}" FontSize="16"
+                                       FontAttributes="Bold" TextColor="{StaticResource MpVerdeEtiqueta}" />
+                            </Grid>
+
+                            <ProgressBar Progress="{Binding ProgresoImpacto}"
+                                         ProgressColor="{StaticResource MpVerdeAcento}"
+                                         BackgroundColor="{StaticResource MpDivisor}"
+                                         HeightRequest="10" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Ultimo movimiento -->
+                    <Border BackgroundColor="White"
+                            Stroke="{StaticResource MpBordeTarjetaBrush}"
+                            StrokeThickness="1.5"
+                            StrokeShape="RoundRectangle 22"
+                            Margin="0,16,0,0"
+                            IsVisible="{Binding HayMovimientos}">
+                        <Grid Padding="20,16" ColumnDefinitions="34,*,Auto" ColumnSpacing="12">
+                            <Ellipse Grid.Column="0" Fill="{StaticResource MpFondoCampo}"
+                                     WidthRequest="34" HeightRequest="34" />
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                <Label Text="{Binding UltimoMovimientoTitulo}" FontSize="13"
+                                       FontAttributes="Bold" TextColor="{StaticResource MpTextoOscuro}" />
+                                <Label Text="{Binding UltimoMovimientoFecha}" FontSize="11"
+                                       TextColor="{StaticResource MpTextoPlaceholder}" />
+                            </VerticalStackLayout>
+                            <Label Grid.Column="2" Text="{Binding UltimoMovimientoEcopesos}"
+                                   FontSize="14" FontAttributes="Bold"
+                                   TextColor="{StaticResource MpVerdeEtiqueta}" VerticalOptions="Center" />
+                        </Grid>
+                    </Border>
+
+                    <Label Text="{Binding MensajeError}"
+                           TextColor="{StaticResource MpError}"
+                           FontSize="12"
+                           Margin="0,12,0,0" />
+
+                    <ActivityIndicator IsRunning="{Binding EstaOcupado}"
+                                       IsVisible="{Binding EstaOcupado}"
+                                       Color="{StaticResource MpVerdeBoton}"
+                                       Margin="0,12,0,0" />
+
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+
+        <comp:BarraInferior Grid.Row="1"
+                             TabActiva="Inicio"
+                             ComandoInicio="{Binding CargarCommand}"
+                             ComandoEscanear="{Binding IrEscanearCommand}"
+                             ComandoMapa="{Binding IrMapaCommand}"
+                             ComandoBilletera="{Binding IrBilleteraCommand}"
+                             ComandoPerfil="{Binding IrPerfilCommand}" />
+
+    </Grid>
+</ContentPage>

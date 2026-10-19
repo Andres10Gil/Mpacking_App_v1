@@ -1,8 +1,8 @@
 namespace MPACKING.Application.Modules.Auth;
 
-public record RegistroRequest(string Nombre, string Correo, string Password, string Rol);
+public record RegistroRequest(string Nombre, string Correo, string Clave, string Rol);
 
-public record LoginRequest(string Correo, string Password);
+public record LoginRequest(string Correo, string Clave);
 
 public record TokenResponse(string AccessToken, string RefreshToken,
                             int ExpiraEnSegundos, UsuarioResponse Usuario);

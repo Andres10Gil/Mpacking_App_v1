@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MPACKING.App.ViewModels"
+             xmlns:comp="clr-namespace:MPACKING.App.Views.Componentes"
+             x:Class="MPACKING.App.Views.TablaValoresPage"
+             x:DataType="vm:TablaValoresViewModel"
+             BackgroundColor="{StaticResource MpFondoPagina}"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0">
+            <Grid>
+
+                <Border BackgroundColor="{StaticResource MpFondoCampo}"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 0,0,26,26"
+                        HeightRequest="148"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Fill" />
+
+                <VerticalStackLayout Padding="22,36,22,30" Spacing="0">
+
+                    <Label Text="Valores por kg"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource MpVerdeTitulo}" />
+                    <Label Text="Precio y ecopesos por kilogramo"
+                           FontSize="13"
+                           TextColor="{StaticResource MpVerdeEtiqueta}"
+                           Margin="0,4,0,20" />
+
+                    <CollectionView ItemsSource="{Binding Categorias}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="vm:CategoriaMaterialesVm">
+                                <Border BackgroundColor="White"
+                                        Stroke="{StaticResource MpBordeTarjetaBrush}"
+                                        StrokeThickness="1.5"
+                                        StrokeShape="RoundRectangle 22"
+                                        Margin="0,0,0,14">
+                                    <VerticalStackLayout Padding="20,16" Spacing="10">
+
+                                        <HorizontalStackLayout Spacing="10">
+                                            <Ellipse Fill="{Binding ColorIcono}" WidthRequest="22" HeightRequest="22"
+                                                     VerticalOptions="Center" />
+                                            <Label Text="{Binding Nombre}" FontSize="14" FontAttributes="Bold"
+                                                   TextColor="{StaticResource MpVerdeTitulo}" VerticalOptions="Center" />
+                                        </HorizontalStackLayout>
+
+                                        <CollectionView ItemsSource="{Binding Materiales}">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate x:DataType="vm:MaterialFilaVm">
+                                                    <Grid Padding="0,6" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+                                                        <Grid.GestureRecognizers>
+                                                            <TapGestureRecognizer
+                                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TablaValoresViewModel}}, Path=VerGuiaCommand}"
+                                                                CommandParameter="{Binding .}" />
+                                                        </Grid.GestureRecognizers>
+                                                        <Label Grid.Column="0" Text="{Binding Nombre}" FontSize="12"
+                                                               FontAttributes="Bold"
+                                                               TextColor="{StaticResource MpTextoOscuro}"
+                                                               VerticalOptions="Center" />
+                                                        <Label Grid.Column="1" Text="{Binding PrecioTexto}" FontSize="11"
+                                                               TextColor="{StaticResource MpTextoPlaceholder}"
+                                                               VerticalOptions="Center" />
+                                                        <Label Grid.Column="2" Text="{Binding EcopesosTexto}" FontSize="12"
+                                                               FontAttributes="Bold"
+                                                               TextColor="{StaticResource MpVerdeEtiqueta}"
+                                                               VerticalOptions="Center" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Label Text="{Binding MensajeError}"
+                           TextColor="{StaticResource MpError}"
+                           FontSize="12"
+                           Margin="0,12,0,0" />
+
+                    <ActivityIndicator IsRunning="{Binding EstaOcupado}"
+                                       IsVisible="{Binding EstaOcupado}"
+                                       Color="{StaticResource MpVerdeBoton}"
+                                       Margin="0,12,0,0" />
+
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+
+        <comp:BarraInferior Grid.Row="1"
+                             TabActiva="Perfil"
+                             ComandoInicio="{Binding VolverCommand}"
+                             ComandoEscanear="{Binding IrEscanearCommand}"
+                             ComandoMapa="{Binding IrMapaCommand}"
+                             ComandoBilletera="{Binding IrBilleteraCommand}"
+                             ComandoPerfil="{Binding VolverCommand}" />
+
+    </Grid>
+</ContentPage>

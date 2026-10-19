@@ -36,14 +36,14 @@ public class AuthService : IAuthService
         if (!Enum.TryParse<RolUsuario>(request.Rol, ignoreCase: true, out var rol))
             throw new DatosInvalidosException($"El rol '{request.Rol}' no es válido.");
 
-        if (request.Password.Length < 8)
+        if (request.Clave.Length < 8)
             throw new DatosInvalidosException(
-                "La contraseña debe tener al menos 8 caracteres.");
+                "La clave debe tener al menos 8 caracteres.");
 
         var usuario = new Usuario(
             request.Nombre,
             request.Correo,
-            _hasher.Hash(request.Password),
+            _hasher.Hash(request.Clave),
             rol);
 
         await _usuarios.AgregarAsync(usuario, ct);
@@ -57,9 +57,9 @@ public class AuthService : IAuthService
     {
         var usuario = await _usuarios.ObtenerPorCorreoAsync(request.Correo, ct);
 
-        // Mensaje genérico para no revelar si el correo existe
+        // Mensaje generico para no revelar si el correo existe
         if (usuario is null)
-            throw new AutenticacionException("Correo o contraseña incorrectos.");
+            throw new AutenticacionException("Correo o clave incorrectos.");
 
         if (usuario.EstaBloqueado)
             throw new AutenticacionException(
@@ -68,11 +68,11 @@ public class AuthService : IAuthService
         if (!usuario.Activo)
             throw new AutenticacionException("La cuenta está desactivada.");
 
-        if (!_hasher.Verificar(request.Password, usuario.PasswordHash))
+        if (!_hasher.Verificar(request.Clave, usuario.PasswordHash))
         {
             usuario.RegistrarIntentoFallido();
             await _uow.GuardarCambiosAsync(ct);
-            throw new AutenticacionException("Correo o contraseña incorrectos.");
+            throw new AutenticacionException("Correo o clave incorrectos.");
         }
 
         usuario.RegistrarLoginExitoso();

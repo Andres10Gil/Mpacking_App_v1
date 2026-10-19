@@ -108,6 +108,15 @@ public class RedencionService : IRedencionService
         return lista.Select(r => Mapear(r, r.Beneficio, saldo)).ToList();
     }
 
+    public async Task<IReadOnlyList<BeneficioResponse>> ListarBeneficiosAsync(
+        int idRestaurante, CancellationToken ct = default)
+    {
+        var beneficios = await _beneficios.ListarPorRestauranteAsync(idRestaurante, ct);
+        return beneficios
+            .Select(b => new BeneficioResponse(b.IdBeneficio, b.Descripcion, b.EcopesosCosto, b.EstaDisponible))
+            .ToList();
+    }
+
     private static string GenerarCodigoUnico() =>
         $"RED-{DateTime.UtcNow:yyyyMMdd}-{Guid.NewGuid().ToString("N")[..8].ToUpperInvariant()}";
 

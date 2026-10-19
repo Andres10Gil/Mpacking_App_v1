@@ -1,3 +1,4 @@
+using MPACKING.Application.Modules.Admin;
 using MPACKING.Domain.Entities;
 
 namespace MPACKING.Application.Common.Interfaces;
@@ -30,6 +31,15 @@ public interface ITransaccionRepository
     Task<IReadOnlyList<Transaccion>> ListarPorUsuarioAsync(
         int idUsuario, int pagina, int tamano, CancellationToken ct = default);
     Task<decimal> TotalKgRecicladosAsync(int idUsuario, CancellationToken ct = default);
+    Task<IReadOnlyList<Transaccion>> ListarPorRecicladorAsync(
+        int idReciclador, int cantidad, CancellationToken ct = default);
+    Task<decimal> SumarKgPorRecicladorDesdeAsync(
+        int idReciclador, DateTime desde, CancellationToken ct = default);
+}
+
+public interface IRecicladorRepository
+{
+    Task<Reciclador?> ObtenerPorIdUsuarioAsync(int idUsuario, CancellationToken ct = default);
 }
 
 public interface IMaterialRepository
@@ -41,6 +51,7 @@ public interface IMaterialRepository
 public interface IRestauranteRepository
 {
     Task<Restaurante?> ObtenerPorIdAsync(int id, CancellationToken ct = default);
+    Task<Restaurante?> ObtenerPorIdUsuarioAsync(int idUsuario, CancellationToken ct = default);
     Task<IReadOnlyList<Restaurante>> ListarActivosAsync(CancellationToken ct = default);
 }
 
@@ -49,6 +60,9 @@ public interface IBeneficioRepository
     Task<Beneficio?> ObtenerPorIdAsync(int id, CancellationToken ct = default);
     Task<IReadOnlyList<Beneficio>> ListarPorRestauranteAsync(
         int idRestaurante, CancellationToken ct = default);
+    Task<IReadOnlyList<Beneficio>> ListarTodosPorRestauranteAsync(
+        int idRestaurante, CancellationToken ct = default);
+    Task AgregarAsync(Beneficio beneficio, CancellationToken ct = default);
 }
 
 public interface IRedencionRepository
@@ -58,12 +72,22 @@ public interface IRedencionRepository
     Task AgregarAsync(Redencion redencion, CancellationToken ct = default);
     Task<IReadOnlyList<Redencion>> ListarPorUsuarioAsync(
         int idUsuario, CancellationToken ct = default);
+    Task<IReadOnlyList<Redencion>> ListarPorRestauranteAsync(
+        int idRestaurante, int cantidad, CancellationToken ct = default);
 }
 
 public interface IPagoRepository
 {
     Task AgregarAsync(Pago pago, CancellationToken ct = default);
     Task<Pago?> ObtenerPorRedencionAsync(int idRedencion, CancellationToken ct = default);
+    Task<IReadOnlyList<Pago>> ListarPorRestauranteAsync(
+        int idRestaurante, int cantidad, CancellationToken ct = default);
+    Task<decimal> SumarMontoNetoDesdeAsync(
+        int idRestaurante, DateTime desde, CancellationToken ct = default);
+    Task<int> ContarAprobadosDesdeAsync(
+        int idRestaurante, DateTime desde, CancellationToken ct = default);
+    Task<int> SumarEcopesosValidadosDesdeAsync(
+        int idRestaurante, DateTime desde, CancellationToken ct = default);
 }
 
 public interface IUbicacionRepository
@@ -76,6 +100,21 @@ public interface IUbicacionRepository
 public interface IGuiaLimpiezaRepository
 {
     Task<GuiaLimpieza?> ObtenerPorMaterialAsync(int idMaterial, CancellationToken ct = default);
+}
+
+/// <summary>Consultas agregadas para el panel de administración. Solo lectura.</summary>
+public interface IAdminRepository
+{
+    Task<int> ContarUsuariosActivosAsync(CancellationToken ct = default);
+    Task<int> ContarTransaccionesAsync(CancellationToken ct = default);
+    Task<int> SumarEcopesosDadosAsync(CancellationToken ct = default);
+    Task<decimal> SumarKgRecicladosAsync(CancellationToken ct = default);
+    Task<decimal> SumarKgRecicladosEnMesAsync(int anio, int mes, CancellationToken ct = default);
+    Task<IReadOnlyList<Usuario>> ListarUsuariosAsync(
+        string? busqueda, int pagina, int tamano, CancellationToken ct = default);
+    Task<IReadOnlyList<Redencion>> ListarRedencionesPendientesAsync(
+        int cantidad, CancellationToken ct = default);
+    Task<IReadOnlyList<MaterialTotalDato>> TotalesPorMaterialAsync(CancellationToken ct = default);
 }
 
 /// <summary>

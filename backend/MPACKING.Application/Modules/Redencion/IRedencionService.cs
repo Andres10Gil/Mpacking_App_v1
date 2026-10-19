@@ -9,4 +9,7 @@ public interface IRedencionService
 
     Task<IReadOnlyList<RedencionResponse>> ListarPorUsuarioAsync(
         int idUsuario, CancellationToken ct = default);
+
+    Task<IReadOnlyList<BeneficioResponse>> ListarBeneficiosAsync(
+        int idRestaurante, CancellationToken ct = default);
 }

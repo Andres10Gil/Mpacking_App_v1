@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MPACKING.App.Views.Componentes.BarraInferiorAdmin"
+             x:Name="EstaBarra">
+
+    <Grid HeightRequest="96" BackgroundColor="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <BoxView Grid.Row="0" Color="{StaticResource MpDivisor}" />
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*" Padding="6,10,6,0">
+
+            <!-- Inicio -->
+            <VerticalStackLayout Grid.Column="0" Spacing="4" HorizontalOptions="Center">
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTapInicio" />
+                </VerticalStackLayout.GestureRecognizers>
+                <Ellipse WidthRequest="18" HeightRequest="18">
+                    <Ellipse.Triggers>
+                        <DataTrigger TargetType="Ellipse"
+                                     Binding="{Binding TabActiva, Source={x:Reference EstaBarra}}" Value="Inicio">
+                            <Setter Property="Fill" Value="{StaticResource MpVerdeBoton}" />
+                        </DataTrigger>
+                    </Ellipse.Triggers>
+                    <Ellipse.Fill>
+                        <SolidColorBrush Color="{StaticResource MpDivisor}" />
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Label Text="Inicio" FontSize="10" HorizontalOptions="Center">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label"
+                                     Binding="{Binding TabActiva, Source={x:Reference EstaBarra}}" Value="Inicio">
+                            <Setter Property="TextColor" Value="{StaticResource MpVerdeTitulo}" />
+                            <Setter Property="FontAttributes" Value="Bold" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                    <Label.TextColor>
+                        <x:StaticResource Key="MpTextoPlaceholder" />
+                    </Label.TextColor>
+                </Label>
+            </VerticalStackLayout>
+
+            <!-- Usuarios -->
+            <VerticalStackLayout Grid.Column="1" Spacing="4" HorizontalOptions="Center">
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTapUsuarios" />
+                </VerticalStackLayout.GestureRecognizers>
+                <Ellipse WidthRequest="18" HeightRequest="18">
+                    <Ellipse.Triggers>
+                        <DataTrigger TargetType="Ellipse"
+                                     Binding="{Binding TabActiva, Source={x:Reference EstaBarra}}" Value="Usuarios">
+                            <Setter Property="Fill" Value="{StaticResource MpVerdeBoton}" />
+                        </DataTrigger>
+                    </Ellipse.Triggers>
+                    <Ellipse.Fill>
+                        <SolidColorBrush Color="{StaticResource MpDivisor}" />
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Label Text="Usuarios" FontSize="10" HorizontalOptions="Center">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label"
+                                     Binding="{Binding TabActiva, Source={x:Reference EstaBarra}}" Value="Usuarios">
+                            <Setter Property="TextColor" Value="{StaticResource MpVerdeTitulo}" />
+                            <Setter Property="FontAttributes" Value="Bold" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                    <Label.TextColor>
+                        <x:StaticResource Key="MpTextoPlaceholder" />
+                    </Label.TextColor>
+                </Label>
+            </VerticalStackLayout>
+
+            <!-- Reportes -->
+            <VerticalStackLayout Grid.Column="2" Spacing="4" HorizontalOptions="Center">
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTapReportes" />
+                </VerticalStackLayout.GestureRecognizers>
+                <Ellipse WidthRequest="18" HeightRequest="18">
+                    <Ellipse.Triggers>
+                        <DataTrigger TargetType="Ellipse"
+                                     Binding="{Binding TabActiva, Source={x:Reference EstaBarra}}" Value="Reportes">
+                            <Setter Property="Fill" Value="{StaticResource MpVerdeBoton}" />
+                        </DataTrigger>
+                    </Ellipse.Triggers>
+                    <Ellipse.Fill>
+                        <SolidColorBrush Color="{StaticResource MpDivisor}" />
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Label Text="Reportes" FontSize="10" HorizontalOptions="Center">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label"
+                                     Binding="{Binding TabActiva, Source={x:Reference EstaBarra}}" Value="Reportes">
+                            <Setter Property="TextColor" Value="{StaticResource MpVerdeTitulo}" />
+                            <Setter Property="FontAttributes" Value="Bold" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                    <Label.TextColor>
+                        <x:StaticResource Key="MpTextoPlaceholder" />
+                    </Label.TextColor>
+                </Label>
+            </VerticalStackLayout>
+
+            <!-- Config -->
+            <VerticalStackLayout Grid.Column="3" Spacing="4" HorizontalOptions="Center">
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTapConfig" />
+                </VerticalStackLayout.GestureRecognizers>
+                <Ellipse WidthRequest="18" HeightRequest="18">
+                    <Ellipse.Triggers>
+                        <DataTrigger TargetType="Ellipse"
+                                     Binding="{Binding TabActiva, Source={x:Reference EstaBarra}}" Value="Config">
+                            <Setter Property="Fill" Value="{StaticResource MpVerdeBoton}" />
+                        </DataTrigger>
+                    </Ellipse.Triggers>
+                    <Ellipse.Fill>
+                        <SolidColorBrush Color="{StaticResource MpDivisor}" />
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Label Text="Config" FontSize="10" HorizontalOptions="Center">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label"
+                                     Binding="{Binding TabActiva, Source={x:Reference EstaBarra}}" Value="Config">
+                            <Setter Property="TextColor" Value="{StaticResource MpVerdeTitulo}" />
+                            <Setter Property="FontAttributes" Value="Bold" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                    <Label.TextColor>
+                        <x:StaticResource Key="MpTextoPlaceholder" />
+                    </Label.TextColor>
+                </Label>
+            </VerticalStackLayout>
+
+        </Grid>
+    </Grid>
+</ContentView>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MPACKING.App.ViewModels"
+             xmlns:comp="clr-namespace:MPACKING.App.Views.Componentes"
+             x:Class="MPACKING.App.Views.BilleteraPage"
+             x:DataType="vm:BilleteraViewModel"
+             BackgroundColor="{StaticResource MpFondoPagina}"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0">
+            <Grid>
+
+                <Border BackgroundColor="{StaticResource MpFondoCampo}"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 0,0,26,26"
+                        HeightRequest="132"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Fill" />
+
+                <VerticalStackLayout Padding="22,36,22,30" Spacing="0">
+
+                    <Label Text="Billetera"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource MpVerdeTitulo}"
+                           Margin="0,0,0,18" />
+
+                    <!-- Tarjeta de saldo -->
+                    <Border BackgroundColor="{StaticResource MpVerdeBoton}"
+                            Stroke="Transparent"
+                            StrokeShape="RoundRectangle 26"
+                            Padding="24,22">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Text="Saldo disponible" TextColor="White" FontAttributes="Bold" FontSize="12" />
+                            <Label Text="{Binding SaldoTexto}" TextColor="White" FontAttributes="Bold" FontSize="46" />
+                            <Label TextColor="White" FontSize="12" Margin="0,2,0,16">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="ecopesos · " />
+                                        <Span Text="{Binding EquivalenteTexto}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                                <Border Grid.Column="0" BackgroundColor="White" Stroke="Transparent"
+                                        StrokeShape="RoundRectangle 20" HeightRequest="40">
+                                    <Label Text="Redimir" FontSize="14" FontAttributes="Bold"
+                                           TextColor="{StaticResource MpVerdeEtiqueta}"
+                                           HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Border>
+                                <Border Grid.Column="1" BackgroundColor="{StaticResource MpVerdeTitulo}" Stroke="Transparent"
+                                        StrokeShape="RoundRectangle 20" HeightRequest="40">
+                                    <Label Text="Historial" FontSize="14" FontAttributes="Bold"
+                                           TextColor="White"
+                                           HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Border>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Movimientos -->
+                    <Border BackgroundColor="White"
+                            Stroke="{StaticResource MpBordeTarjetaBrush}"
+                            StrokeThickness="1.5"
+                            StrokeShape="RoundRectangle 22"
+                            Margin="0,16,0,0">
+                        <VerticalStackLayout Padding="20,16" Spacing="0">
+                            <Label Text="Movimientos" FontSize="15" FontAttributes="Bold"
+                                   TextColor="{StaticResource MpVerdeTitulo}" Margin="0,0,0,8" />
+
+                            <Label Text="Todavia no tienes movimientos."
+                                   FontSize="12"
+                                   TextColor="{StaticResource MpTextoPlaceholder}"
+                                   IsVisible="{Binding HayMovimientos, Converter={StaticResource InvertirBool}}" />
+
+                            <CollectionView ItemsSource="{Binding Movimientos}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="vm:MovimientoVm">
+                                        <Grid Padding="0,10" ColumnDefinitions="34,*,Auto" ColumnSpacing="12">
+                                            <Ellipse Grid.Column="0" Fill="{StaticResource MpFondoCampo}"
+                                                     WidthRequest="34" HeightRequest="34" />
+                                            <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                                <Label Text="{Binding Titulo}" FontSize="13" FontAttributes="Bold"
+                                                       TextColor="{StaticResource MpTextoOscuro}" />
+                                                <Label Text="{Binding FechaTexto}" FontSize="11"
+                                                       TextColor="{StaticResource MpTextoPlaceholder}" />
+                                            </VerticalStackLayout>
+                                            <Label Grid.Column="2" Text="{Binding EcopesosTexto}" FontSize="14"
+                                                   FontAttributes="Bold" TextColor="{StaticResource MpVerdeEtiqueta}"
+                                                   VerticalOptions="Center" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Impacto -->
+                    <Border BackgroundColor="White"
+                            Stroke="{StaticResource MpBordeTarjetaBrush}"
+                            StrokeThickness="1.5"
+                            StrokeShape="RoundRectangle 22"
+                            Margin="0,16,0,0">
+                        <VerticalStackLayout Padding="20,18" Spacing="10">
+                            <Label Text="Tu impacto" FontSize="14" FontAttributes="Bold"
+                                   TextColor="{StaticResource MpVerdeTitulo}" />
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Grid.Column="0" Text="Reciclado" FontSize="12"
+                                       TextColor="{StaticResource MpTextoPlaceholder}" VerticalOptions="Center" />
+                                <Label Grid.Column="1" Text="{Binding TotalKgTexto}" FontSize="16"
+                                       FontAttributes="Bold" TextColor="{StaticResource MpVerdeEtiqueta}" />
+                            </Grid>
+                            <ProgressBar Progress="{Binding ProgresoImpacto}"
+                                         ProgressColor="{StaticResource MpVerdeAcento}"
+                                         BackgroundColor="{StaticResource MpDivisor}"
+                                         HeightRequest="10" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Label Text="{Binding MensajeError}"
+                           TextColor="{StaticResource MpError}"
+                           FontSize="12"
+                           Margin="0,12,0,0" />
+
+                    <ActivityIndicator IsRunning="{Binding EstaOcupado}"
+                                       IsVisible="{Binding EstaOcupado}"
+                                       Color="{StaticResource MpVerdeBoton}"
+                                       Margin="0,12,0,0" />
+
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+
+        <comp:BarraInferior Grid.Row="1"
+                             TabActiva="Billetera"
+                             ComandoInicio="{Binding VolverCommand}"
+                             ComandoEscanear="{Binding IrEscanearCommand}"
+                             ComandoMapa="{Binding IrMapaCommand}"
+                             ComandoBilletera="{Binding CargarCommand}"
+                             ComandoPerfil="{Binding IrPerfilCommand}" />
+
+    </Grid>
+</ContentPage>

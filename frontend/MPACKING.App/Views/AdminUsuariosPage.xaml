@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MPACKING.App.ViewModels"
+             xmlns:comp="clr-namespace:MPACKING.App.Views.Componentes"
+             x:Class="MPACKING.App.Views.AdminUsuariosPage"
+             x:DataType="vm:AdminUsuariosViewModel"
+             BackgroundColor="{StaticResource MpFondoPagina}"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="22,36,22,30" Spacing="0">
+
+                <Label Text="Usuarios"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MpVerdeTitulo}"
+                       Margin="0,0,0,18" />
+
+                <!-- Buscador -->
+                <Border BackgroundColor="White"
+                        Stroke="{StaticResource MpBordeTarjetaBrush}"
+                        StrokeThickness="1.5"
+                        StrokeShape="RoundRectangle 24"
+                        Padding="16,0"
+                        HeightRequest="48">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Entry Grid.Column="0"
+                               Text="{Binding TextoBusqueda}"
+                               Placeholder="Buscar por nombre o correo"
+                               FontSize="13"
+                               TextColor="{StaticResource MpTextoOscuro}"
+                               PlaceholderColor="{StaticResource MpTextoPlaceholder}"
+                               VerticalOptions="Center"
+                               ReturnCommand="{Binding CargarCommand}" />
+                        <Label Grid.Column="1" Text="Buscar" FontSize="12" FontAttributes="Bold"
+                               TextColor="{StaticResource MpVerdeEtiqueta}" VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CargarCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                </Border>
+
+                <Border BackgroundColor="White"
+                        Stroke="{StaticResource MpBordeTarjetaBrush}"
+                        StrokeThickness="1.5"
+                        StrokeShape="RoundRectangle 22"
+                        Margin="0,16,0,0">
+                    <VerticalStackLayout Padding="4,4">
+                        <CollectionView ItemsSource="{Binding Usuarios}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="vm:UsuarioAdminVm">
+                                    <Grid Padding="16,12" ColumnDefinitions="34,*,Auto" ColumnSpacing="12">
+                                        <Ellipse Grid.Column="0" Fill="{Binding BadgeColor}"
+                                                 WidthRequest="30" HeightRequest="30" />
+                                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                            <Label Text="{Binding Nombre}" FontSize="13" FontAttributes="Bold"
+                                                   TextColor="{StaticResource MpTextoOscuro}" />
+                                            <Label Text="{Binding Detalle}" FontSize="11"
+                                                   TextColor="{StaticResource MpTextoPlaceholder}" />
+                                        </VerticalStackLayout>
+                                        <Label Grid.Column="2" Text="{Binding ValorTexto}" FontSize="12"
+                                               FontAttributes="Bold" TextColor="{StaticResource MpVerdeEtiqueta}"
+                                               VerticalOptions="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Label Text="{Binding MensajeError}"
+                       TextColor="{StaticResource MpError}"
+                       FontSize="12"
+                       Margin="0,12,0,0" />
+
+                <ActivityIndicator IsRunning="{Binding EstaOcupado}"
+                                   IsVisible="{Binding EstaOcupado}"
+                                   Color="{StaticResource MpVerdeBoton}"
+                                   Margin="0,12,0,0" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <comp:BarraInferiorAdmin Grid.Row="1"
+                                  TabActiva="Usuarios"
+                                  ComandoInicio="{Binding VolverCommand}"
+                                  ComandoUsuarios="{Binding CargarCommand}"
+                                  ComandoReportes="{Binding IrAReportesCommand}"
+                                  ComandoConfig="{Binding IrAConfigCommand}" />
+
+    </Grid>
+</ContentPage>

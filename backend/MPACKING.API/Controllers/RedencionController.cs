@@ -34,4 +34,10 @@ public class RedencionController : ControllerBase
     public async Task<ActionResult<IReadOnlyList<RedencionResponse>>> Mias(
         CancellationToken ct)
         => Ok(await _redenciones.ListarPorUsuarioAsync(User.ObtenerIdUsuario(), ct));
+
+    /// <summary>Beneficios activos de un restaurante, para elegir que canjear.</summary>
+    [HttpGet("beneficios/{idRestaurante:int}")]
+    public async Task<ActionResult<IReadOnlyList<BeneficioResponse>>> Beneficios(
+        int idRestaurante, CancellationToken ct)
+        => Ok(await _redenciones.ListarBeneficiosAsync(idRestaurante, ct));
 }

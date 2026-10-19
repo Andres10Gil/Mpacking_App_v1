@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MPACKING.App.ViewModels"
+             xmlns:comp="clr-namespace:MPACKING.App.Views.Componentes"
+             x:Class="MPACKING.App.Views.RestauranteHistorialPage"
+             x:DataType="vm:RestauranteHistorialViewModel"
+             BackgroundColor="{StaticResource MpFondoPagina}"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="22,36,22,30" Spacing="0">
+
+                <Label Text="Historial"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MpVerdeTitulo}" />
+                <Label Text="Pagos recibidos"
+                       FontSize="13"
+                       TextColor="{StaticResource MpVerdeEtiqueta}"
+                       Margin="0,4,0,18" />
+
+                <Border BackgroundColor="{StaticResource MpVerdeBoton}"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 26"
+                        Padding="24,20">
+                    <VerticalStackLayout HorizontalOptions="Center" Spacing="2">
+                        <Label Text="Total del mes" TextColor="White" FontAttributes="Bold"
+                               FontSize="12" HorizontalOptions="Center" />
+                        <Label Text="{Binding TotalMesTexto}" TextColor="White" FontAttributes="Bold"
+                               FontSize="32" HorizontalOptions="Center" />
+                        <Label Text="{Binding RedencionesMesTexto}" FontSize="12" TextColor="White"
+                               HorizontalOptions="Center" Margin="0,4,0,0" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border BackgroundColor="White"
+                        Stroke="{StaticResource MpBordeTarjetaBrush}"
+                        StrokeThickness="1.5"
+                        StrokeShape="RoundRectangle 22"
+                        Margin="0,16,0,0">
+                    <VerticalStackLayout Padding="20,16" Spacing="4">
+                        <CollectionView ItemsSource="{Binding Pagos}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="vm:PagoHistorialVm">
+                                    <Grid Padding="0,10" ColumnDefinitions="34,*,Auto" ColumnSpacing="10">
+                                        <Ellipse Grid.Column="0" Fill="{Binding BadgeColor}"
+                                                 WidthRequest="32" HeightRequest="32" VerticalOptions="Start" />
+                                        <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                            <Label Text="{Binding Usuario}" FontSize="13" FontAttributes="Bold"
+                                                   TextColor="{StaticResource MpTextoOscuro}" />
+                                            <Label Text="{Binding Detalle}" FontSize="10"
+                                                   TextColor="{StaticResource MpTextoPlaceholder}" />
+                                        </VerticalStackLayout>
+                                        <Label Grid.Column="2" Text="{Binding MontoTexto}" FontSize="13"
+                                               FontAttributes="Bold" TextColor="{StaticResource MpVerdeEtiqueta}"
+                                               VerticalOptions="Start" />
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Label Text="{Binding MensajeError}"
+                       TextColor="{StaticResource MpError}"
+                       FontSize="12"
+                       Margin="0,12,0,0" />
+
+                <ActivityIndicator IsRunning="{Binding EstaOcupado}"
+                                   IsVisible="{Binding EstaOcupado}"
+                                   Color="{StaticResource MpVerdeBoton}"
+                                   Margin="0,12,0,0" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <comp:BarraInferiorRestaurante Grid.Row="1"
+                                        TabActiva="Historial"
+                                        ComandoInicio="{Binding VolverCommand}"
+                                        ComandoBeneficios="{Binding IrABeneficiosCommand}"
+                                        ComandoHistorial="{Binding CargarCommand}"
+                                        ComandoPerfil="{Binding IrAPerfilCommand}" />
+
+    </Grid>
+</ContentPage>

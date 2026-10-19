@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MPACKING.App.ViewModels"
+             x:Class="MPACKING.App.Views.RegistroPage"
+             x:DataType="vm:RegistroViewModel"
+             BackgroundColor="{StaticResource MpFondoPagina}"
+             Shell.NavBarIsVisible="False">
+
+    <Grid>
+
+        <!-- Banda superior verde con esquina inferior redondeada, igual a U02 del Figma -->
+        <Border BackgroundColor="{StaticResource MpFondoCampo}"
+                Stroke="Transparent"
+                StrokeShape="RoundRectangle 0,0,28,28"
+                HeightRequest="148"
+                VerticalOptions="Start"
+                HorizontalOptions="Fill" />
+
+        <!-- Recorte decorativo del mascota, esquina superior derecha -->
+        <Image Source="mascota_mpacking.png"
+               HeightRequest="140"
+               Aspect="AspectFit"
+               HorizontalOptions="End"
+               VerticalOptions="Start"
+               Margin="0,-10,10,0"
+               Opacity="0.9" />
+
+        <ScrollView>
+            <VerticalStackLayout Padding="22,44,22,30" Spacing="0">
+
+                <Label Text="Crear cuenta"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MpVerdeTitulo}" />
+
+                <Label Text="Es rapido y facil"
+                       FontSize="13"
+                       TextColor="{StaticResource MpVerdeEtiqueta}"
+                       Margin="0,4,0,26" />
+
+                <Border BackgroundColor="White"
+                        Stroke="{StaticResource MpBordeTarjetaBrush}"
+                        StrokeThickness="1.5"
+                        StrokeShape="RoundRectangle 26">
+                    <VerticalStackLayout Padding="20" Spacing="6">
+
+                        <Label Text="Nombre completo"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource MpVerdeEtiqueta}"
+                               FontSize="12" />
+                        <Border BackgroundColor="{StaticResource MpFondoCampo}"
+                                Stroke="Transparent"
+                                StrokeShape="RoundRectangle 23"
+                                HeightRequest="46">
+                            <Entry Text="{Binding NombreCompleto}"
+                                   Placeholder="Juan Garcia"
+                                   FontSize="13"
+                                   TextColor="{StaticResource MpTextoOscuro}"
+                                   PlaceholderColor="{StaticResource MpTextoPlaceholder}"
+                                   VerticalOptions="Center"
+                                   Margin="10,0" />
+                        </Border>
+
+                        <Label Text="Correo"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource MpVerdeEtiqueta}"
+                               FontSize="12"
+                               Margin="0,12,0,0" />
+                        <Border BackgroundColor="{StaticResource MpFondoCampo}"
+                                Stroke="Transparent"
+                                StrokeShape="RoundRectangle 23"
+                                HeightRequest="46">
+                            <Entry Text="{Binding Correo}"
+                                   Placeholder="juan@correo.com"
+                                   Keyboard="Email"
+                                   FontSize="13"
+                                   TextColor="{StaticResource MpTextoOscuro}"
+                                   PlaceholderColor="{StaticResource MpTextoPlaceholder}"
+                                   VerticalOptions="Center"
+                                   Margin="10,0" />
+                        </Border>
+
+                        <Label Text="Clave"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource MpVerdeEtiqueta}"
+                               FontSize="12"
+                               Margin="0,12,0,0" />
+                        <Border BackgroundColor="{StaticResource MpFondoCampo}"
+                                Stroke="Transparent"
+                                StrokeShape="RoundRectangle 23"
+                                HeightRequest="46">
+                            <Entry Text="{Binding Clave}"
+                                   Placeholder="Minimo 8 caracteres"
+                                   IsPassword="True"
+                                   FontSize="13"
+                                   TextColor="{StaticResource MpTextoOscuro}"
+                                   PlaceholderColor="{StaticResource MpTextoPlaceholder}"
+                                   VerticalOptions="Center"
+                                   Margin="10,0" />
+                        </Border>
+
+                        <HorizontalStackLayout Spacing="10" Margin="0,16,0,0">
+                            <CheckBox IsChecked="{Binding AceptoTerminos}"
+                                      Color="{StaticResource MpVerdeBoton}"
+                                      VerticalOptions="Start" />
+                            <Label Text="Acepto terminos y politica de privacidad"
+                                   FontSize="11"
+                                   TextColor="{StaticResource MpTextoPlaceholder}"
+                                   VerticalOptions="Center"
+                                   LineBreakMode="WordWrap" />
+                        </HorizontalStackLayout>
+
+                        <Label Text="{Binding MensajeError}"
+                               TextColor="{StaticResource MpError}"
+                               FontSize="12"
+                               Margin="0,10,0,0" />
+
+                        <ActivityIndicator IsRunning="{Binding EstaOcupado}"
+                                           IsVisible="{Binding EstaOcupado}"
+                                           Color="{StaticResource MpVerdeBoton}"
+                                           Margin="0,8,0,0" />
+
+                    </VerticalStackLayout>
+                </Border>
+
+                <Button Text="Crear mi cuenta"
+                        Command="{Binding CrearCuentaCommand}"
+                        BackgroundColor="{StaticResource MpVerdeBoton}"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        CornerRadius="26"
+                        HeightRequest="52"
+                        Margin="0,20,0,0" />
+
+                <Label Text="Ya tienes cuenta? Inicia sesion"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MpVerdeEtiqueta}"
+                       FontSize="13"
+                       HorizontalOptions="Center"
+                       Margin="0,20,0,0">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding IrALoginCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

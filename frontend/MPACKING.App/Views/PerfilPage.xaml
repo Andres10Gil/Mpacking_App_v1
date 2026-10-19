@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MPACKING.App.ViewModels"
+             xmlns:comp="clr-namespace:MPACKING.App.Views.Componentes"
+             x:Class="MPACKING.App.Views.PerfilPage"
+             x:DataType="vm:PerfilViewModel"
+             BackgroundColor="{StaticResource MpFondoPagina}"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0">
+            <Grid>
+
+                <Border BackgroundColor="{StaticResource MpFondoCampo}"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 0,0,26,26"
+                        HeightRequest="132"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Fill" />
+
+                <VerticalStackLayout Padding="22,36,22,30" Spacing="0">
+
+                    <Label Text="Mi perfil"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource MpVerdeTitulo}"
+                           Margin="0,0,0,18" />
+
+                    <Border BackgroundColor="White"
+                            Stroke="{StaticResource MpBordeTarjetaBrush}"
+                            StrokeThickness="1.5"
+                            StrokeShape="RoundRectangle 22">
+                        <Grid Padding="20,18" ColumnDefinitions="60,*" ColumnSpacing="14">
+                            <Border Grid.Column="0" BackgroundColor="{StaticResource MpFondoCampo}"
+                                    Stroke="Transparent" StrokeShape="RoundRectangle 30"
+                                    WidthRequest="60" HeightRequest="60" Padding="0">
+                                <Image Source="mascota_mpacking.png" Aspect="AspectFill" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                <Label Text="{Binding Nombre}" FontSize="16" FontAttributes="Bold"
+                                       TextColor="{StaticResource MpVerdeTitulo}" />
+                                <Label Text="{Binding Correo}" FontSize="12"
+                                       TextColor="{StaticResource MpTextoPlaceholder}" />
+                                <Label Text="{Binding Rol}" FontSize="11" FontAttributes="Bold"
+                                       TextColor="{StaticResource MpVerdeEtiqueta}" Margin="0,4,0,0" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10" Margin="0,16,0,0">
+                        <Border Grid.Column="0" BackgroundColor="White" Stroke="{StaticResource MpBordeTarjetaBrush}"
+                                StrokeThickness="1.5" StrokeShape="RoundRectangle 18" Padding="10,16">
+                            <VerticalStackLayout HorizontalOptions="Center" Spacing="2">
+                                <Label Text="{Binding SaldoTexto}" FontSize="18" FontAttributes="Bold"
+                                       TextColor="{StaticResource MpVerdeTitulo}" HorizontalOptions="Center" />
+                                <Label Text="ecopesos" FontSize="10" TextColor="{StaticResource MpTextoPlaceholder}"
+                                       HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border Grid.Column="1" BackgroundColor="White" Stroke="{StaticResource MpBordeTarjetaBrush}"
+                                StrokeThickness="1.5" StrokeShape="RoundRectangle 18" Padding="10,16">
+                            <VerticalStackLayout HorizontalOptions="Center" Spacing="2">
+                                <Label Text="{Binding KgTexto}" FontSize="18" FontAttributes="Bold"
+                                       TextColor="{StaticResource MpVerdeTitulo}" HorizontalOptions="Center" />
+                                <Label Text="kg recicl." FontSize="10" TextColor="{StaticResource MpTextoPlaceholder}"
+                                       HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border Grid.Column="2" BackgroundColor="White" Stroke="{StaticResource MpBordeTarjetaBrush}"
+                                StrokeThickness="1.5" StrokeShape="RoundRectangle 18" Padding="10,16">
+                            <VerticalStackLayout HorizontalOptions="Center" Spacing="2">
+                                <Label Text="{Binding CanjesTexto}" FontSize="18" FontAttributes="Bold"
+                                       TextColor="{StaticResource MpVerdeTitulo}" HorizontalOptions="Center" />
+                                <Label Text="canjes" FontSize="10" TextColor="{StaticResource MpTextoPlaceholder}"
+                                       HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+
+                    <Border BackgroundColor="White"
+                            Stroke="{StaticResource MpBordeTarjetaBrush}"
+                            StrokeThickness="1.5"
+                            StrokeShape="RoundRectangle 22"
+                            Margin="0,16,0,0">
+                        <VerticalStackLayout Padding="4,4">
+
+                            <Grid Padding="16,16" ColumnDefinitions="*,Auto">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding IrBilleteraCommand}" />
+                                </Grid.GestureRecognizers>
+                                <Label Grid.Column="0" Text="Historial de reciclaje" FontSize="14"
+                                       TextColor="{StaticResource MpTextoOscuro}" VerticalOptions="Center" />
+                                <Label Grid.Column="1" Text="›" FontSize="18"
+                                       TextColor="{StaticResource MpTextoPlaceholder}" VerticalOptions="Center" />
+                            </Grid>
+                            <BoxView HeightRequest="1" Color="{StaticResource MpDivisor}" Margin="16,0" />
+
+                            <Grid Padding="16,16" ColumnDefinitions="*,Auto">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding IrTablaValoresCommand}" />
+                                </Grid.GestureRecognizers>
+                                <Label Grid.Column="0" Text="Tabla de valores" FontSize="14"
+                                       TextColor="{StaticResource MpTextoOscuro}" VerticalOptions="Center" />
+                                <Label Grid.Column="1" Text="›" FontSize="18"
+                                       TextColor="{StaticResource MpTextoPlaceholder}" VerticalOptions="Center" />
+                            </Grid>
+                            <BoxView HeightRequest="1" Color="{StaticResource MpDivisor}" Margin="16,0" />
+
+                            <Grid Padding="16,16" ColumnDefinitions="*,Auto">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding CerrarSesionCommand}" />
+                                </Grid.GestureRecognizers>
+                                <Label Grid.Column="0" Text="Cerrar sesion" FontSize="14" FontAttributes="Bold"
+                                       TextColor="{StaticResource MpError}" VerticalOptions="Center" />
+                                <Label Grid.Column="1" Text="›" FontSize="18"
+                                       TextColor="{StaticResource MpTextoPlaceholder}" VerticalOptions="Center" />
+                            </Grid>
+
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Label Text="{Binding MensajeError}"
+                           TextColor="{StaticResource MpError}"
+                           FontSize="12"
+                           Margin="0,12,0,0" />
+
+                    <ActivityIndicator IsRunning="{Binding EstaOcupado}"
+                                       IsVisible="{Binding EstaOcupado}"
+                                       Color="{StaticResource MpVerdeBoton}"
+                                       Margin="0,12,0,0" />
+
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+
+        <comp:BarraInferior Grid.Row="1"
+                             TabActiva="Perfil"
+                             ComandoInicio="{Binding VolverCommand}"
+                             ComandoEscanear="{Binding IrEscanearCommand}"
+                             ComandoMapa="{Binding IrMapaCommand}"
+                             ComandoBilletera="{Binding IrBilleteraCommand}"
+                             ComandoPerfil="{Binding CargarCommand}" />
+
+    </Grid>
+</ContentPage>

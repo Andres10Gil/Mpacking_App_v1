@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MPACKING.App.ViewModels"
+             xmlns:comp="clr-namespace:MPACKING.App.Views.Componentes"
+             x:Class="MPACKING.App.Views.AdminReportesPage"
+             x:DataType="vm:AdminReportesViewModel"
+             BackgroundColor="{StaticResource MpFondoPagina}"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="22,36,22,30" Spacing="0">
+
+                <Label Text="Reportes"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MpVerdeTitulo}" />
+                <Label Text="Impacto ambiental"
+                       FontSize="13"
+                       TextColor="{StaticResource MpVerdeEtiqueta}"
+                       Margin="0,4,0,18" />
+
+                <!-- CO2 total -->
+                <Border BackgroundColor="{StaticResource MpVerdeBoton}"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 26"
+                        Padding="24,22">
+                    <VerticalStackLayout HorizontalOptions="Center" Spacing="2">
+                        <Label Text="CO2 total evitado" TextColor="White" FontAttributes="Bold"
+                               FontSize="12" HorizontalOptions="Center" />
+                        <Label Text="{Binding Co2TotalTexto}" TextColor="White" FontAttributes="Bold"
+                               FontSize="38" HorizontalOptions="Center" />
+                        <Label Text="{Binding ArbolesTexto}" TextColor="White" FontSize="12"
+                               HorizontalOptions="Center" Margin="0,4,0,0" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Distribucion -->
+                <Border BackgroundColor="White"
+                        Stroke="{StaticResource MpBordeTarjetaBrush}"
+                        StrokeThickness="1.5"
+                        StrokeShape="RoundRectangle 22"
+                        Margin="0,16,0,0">
+                    <VerticalStackLayout Padding="20,18" Spacing="12">
+                        <Label Text="Distribucion por material" FontSize="14" FontAttributes="Bold"
+                               TextColor="{StaticResource MpVerdeTitulo}" />
+
+                        <CollectionView ItemsSource="{Binding Distribucion}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="vm:DistribucionVm">
+                                    <Grid Padding="0,6" ColumnDefinitions="70,*,44" ColumnSpacing="10">
+                                        <Label Grid.Column="0" Text="{Binding Material}" FontSize="11"
+                                               TextColor="{StaticResource MpTextoPlaceholder}"
+                                               VerticalOptions="Center" LineBreakMode="TailTruncation" />
+                                        <ProgressBar Grid.Column="1" Progress="{Binding Porcentaje}"
+                                                     ProgressColor="{StaticResource MpVerdeAcento}"
+                                                     BackgroundColor="{StaticResource MpDivisor}"
+                                                     HeightRequest="10" VerticalOptions="Center" />
+                                        <Label Grid.Column="2" Text="{Binding PorcentajeTexto}" FontSize="11"
+                                               FontAttributes="Bold" TextColor="{StaticResource MpVerdeTitulo}"
+                                               VerticalOptions="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Totales -->
+                <Border BackgroundColor="White"
+                        Stroke="{StaticResource MpBordeTarjetaBrush}"
+                        StrokeThickness="1.5"
+                        StrokeShape="RoundRectangle 22"
+                        Margin="0,16,0,0">
+                    <VerticalStackLayout Padding="20,18" Spacing="4">
+                        <Label Text="Totales por material" FontSize="14" FontAttributes="Bold"
+                               TextColor="{StaticResource MpVerdeTitulo}" Margin="0,0,0,8" />
+
+                        <CollectionView ItemsSource="{Binding Totales}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="vm:TotalMaterialVm">
+                                    <Grid Padding="0,10" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+                                        <Label Grid.Column="0" Text="{Binding Material}" FontSize="13"
+                                               FontAttributes="Bold" TextColor="{StaticResource MpTextoOscuro}"
+                                               VerticalOptions="Center" />
+                                        <Label Grid.Column="1" Text="{Binding KgTexto}" FontSize="12"
+                                               TextColor="{StaticResource MpTextoPlaceholder}"
+                                               VerticalOptions="Center" Margin="0,0,10,0" />
+                                        <Label Grid.Column="2" Text="{Binding EcopesosTexto}" FontSize="13"
+                                               FontAttributes="Bold" TextColor="{StaticResource MpVerdeEtiqueta}"
+                                               VerticalOptions="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Label Text="{Binding MensajeError}"
+                       TextColor="{StaticResource MpError}"
+                       FontSize="12"
+                       Margin="0,12,0,0" />
+
+                <ActivityIndicator IsRunning="{Binding EstaOcupado}"
+                                   IsVisible="{Binding EstaOcupado}"
+                                   Color="{StaticResource MpVerdeBoton}"
+                                   Margin="0,12,0,0" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <comp:BarraInferiorAdmin Grid.Row="1"
+                                  TabActiva="Reportes"
+                                  ComandoInicio="{Binding VolverCommand}"
+                                  ComandoUsuarios="{Binding IrAUsuariosCommand}"
+                                  ComandoReportes="{Binding CargarCommand}"
+                                  ComandoConfig="{Binding IrAConfigCommand}" />
+
+    </Grid>
+</ContentPage>

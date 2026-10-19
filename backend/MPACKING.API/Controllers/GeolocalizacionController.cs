@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MPACKING.API.Extensions;
+using MPACKING.Application.Common.Interfaces;
 using MPACKING.Application.Modules.Geolocalizacion;
+using MPACKING.Domain.Exceptions;
 
 namespace MPACKING.API.Controllers;
 
@@ -11,7 +13,12 @@ namespace MPACKING.API.Controllers;
 public class GeolocalizacionController : ControllerBase
 {
     private readonly IGeolocalizacionService _geo;
-    public GeolocalizacionController(IGeolocalizacionService geo) => _geo = geo;
+    private readonly IRecicladorRepository _recicladores;
+    public GeolocalizacionController(IGeolocalizacionService geo, IRecicladorRepository recicladores)
+    {
+        _geo = geo;
+        _recicladores = recicladores;
+    }
 
     /// <summary>
     /// El reciclador reporta su posición. La app la envía cada 30 segundos. RF-18.
@@ -21,7 +28,10 @@ public class GeolocalizacionController : ControllerBase
     public async Task<IActionResult> ReportarPosicion(
         ReportarPosicionRequest request, CancellationToken ct)
     {
-        await _geo.ReportarPosicionAsync(User.ObtenerIdUsuario(), request, ct);
+        var reciclador = await _recicladores.ObtenerPorIdUsuarioAsync(User.ObtenerIdUsuario(), ct)
+            ?? throw new NoEncontradoException("reciclador", User.ObtenerIdUsuario());
+
+        await _geo.ReportarPosicionAsync(reciclador.IdReciclador, request, ct);
         return NoContent();
     }
 

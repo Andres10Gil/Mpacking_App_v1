@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
+
+    <Color x:Key="Primary">#512BD4</Color>
+    <Color x:Key="PrimaryDark">#ac99ea</Color>
+    <Color x:Key="PrimaryDarkText">#242424</Color>
+    <Color x:Key="Secondary">#DFD8F7</Color>
+    <Color x:Key="SecondaryDarkText">#9880e5</Color>
+    <Color x:Key="Tertiary">#2B0B98</Color>
+
+    <Color x:Key="White">White</Color>
+    <Color x:Key="Black">Black</Color>
+    <Color x:Key="Magenta">#D600AA</Color>
+    <Color x:Key="MidnightBlue">#190649</Color>
+    <Color x:Key="OffBlack">#1f1f1f</Color>
+
+    <Color x:Key="Gray100">#E1E1E1</Color>
+    <Color x:Key="Gray200">#C8C8C8</Color>
+    <Color x:Key="Gray300">#ACACAC</Color>
+    <Color x:Key="Gray400">#919191</Color>
+    <Color x:Key="Gray500">#6E6E6E</Color>
+    <Color x:Key="Gray600">#404040</Color>
+    <Color x:Key="Gray900">#212121</Color>
+    <Color x:Key="Gray950">#141414</Color>
+
+    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
+    <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
+    <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
+    <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}"/>
+    <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}"/>
+
+    <SolidColorBrush x:Key="Gray100Brush" Color="{StaticResource Gray100}"/>
+    <SolidColorBrush x:Key="Gray200Brush" Color="{StaticResource Gray200}"/>
+    <SolidColorBrush x:Key="Gray300Brush" Color="{StaticResource Gray300}"/>
+    <SolidColorBrush x:Key="Gray400Brush" Color="{StaticResource Gray400}"/>
+    <SolidColorBrush x:Key="Gray500Brush" Color="{StaticResource Gray500}"/>
+    <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
+    <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
+    <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+
+    <!-- Paleta MPACKING, tomada del spec real de Figma (modo dev) -->
+    <Color x:Key="MpFondoPagina">#F5FBF0</Color>
+    <Color x:Key="MpFondoCampo">#E8F6E1</Color>
+    <Color x:Key="MpBordeTarjeta">#DCF0D0</Color>
+    <Color x:Key="MpVerdeBoton">#4CAF50</Color>
+    <Color x:Key="MpVerdeTitulo">#1B6B3A</Color>
+    <Color x:Key="MpVerdeEtiqueta">#2E7D46</Color>
+    <Color x:Key="MpVerdeAcento">#97C459</Color>
+    <Color x:Key="MpTextoOscuro">#1F3D2B</Color>
+    <Color x:Key="MpTextoPlaceholder">#7C8B80</Color>
+    <Color x:Key="MpDivisor">#E4EDE6</Color>
+    <Color x:Key="MpAmarillo">#FFF3C4</Color>
+    <Color x:Key="MpDurazno">#FFE2C7</Color>
+    <Color x:Key="MpAzul">#D8ECFB</Color>
+    <Color x:Key="MpMorado">#EBE3FA</Color>
+    <Color x:Key="MpRosado">#FFE0E3</Color>
+    <Color x:Key="MpError">#E8735E</Color>
+
+    <SolidColorBrush x:Key="MpFondoPaginaBrush" Color="{StaticResource MpFondoPagina}"/>
+    <SolidColorBrush x:Key="MpFondoCampoBrush" Color="{StaticResource MpFondoCampo}"/>
+    <SolidColorBrush x:Key="MpBordeTarjetaBrush" Color="{StaticResource MpBordeTarjeta}"/>
+    <SolidColorBrush x:Key="MpVerdeBotonBrush" Color="{StaticResource MpVerdeBoton}"/>
+    <SolidColorBrush x:Key="MpVerdeTituloBrush" Color="{StaticResource MpVerdeTitulo}"/>
+    <SolidColorBrush x:Key="MpVerdeEtiquetaBrush" Color="{StaticResource MpVerdeEtiqueta}"/>
+    <SolidColorBrush x:Key="MpVerdeAcentoBrush" Color="{StaticResource MpVerdeAcento}"/>
+    <SolidColorBrush x:Key="MpTextoOscuroBrush" Color="{StaticResource MpTextoOscuro}"/>
+    <SolidColorBrush x:Key="MpTextoPlaceholderBrush" Color="{StaticResource MpTextoPlaceholder}"/>
+    <SolidColorBrush x:Key="MpDivisorBrush" Color="{StaticResource MpDivisor}"/>
+    <SolidColorBrush x:Key="MpAmarilloBrush" Color="{StaticResource MpAmarillo}"/>
+    <SolidColorBrush x:Key="MpDuraznoBrush" Color="{StaticResource MpDurazno}"/>
+    <SolidColorBrush x:Key="MpAzulBrush" Color="{StaticResource MpAzul}"/>
+    <SolidColorBrush x:Key="MpMoradoBrush" Color="{StaticResource MpMorado}"/>
+    <SolidColorBrush x:Key="MpRosadoBrush" Color="{StaticResource MpRosado}"/>
+    <SolidColorBrush x:Key="MpErrorBrush" Color="{StaticResource MpError}"/>
+</ResourceDictionary>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MPACKING.App.ViewModels"
+             x:Class="MPACKING.App.Views.LoginPage"
+             x:DataType="vm:LoginViewModel"
+             BackgroundColor="{StaticResource MpFondoPagina}"
+             Shell.NavBarIsVisible="False">
+
+    <Grid>
+
+        <!-- Blob decorativo superior, igual al de U01 Login del Figma -->
+        <Ellipse Fill="{StaticResource MpFondoCampoBrush}"
+                 WidthRequest="510" HeightRequest="420"
+                 HorizontalOptions="Center"
+                 VerticalOptions="Start"
+                 TranslationY="-260" />
+
+        <!-- Puntos decorativos -->
+        <Ellipse Fill="{StaticResource MpAmarilloBrush}"
+                 WidthRequest="54" HeightRequest="54"
+                 HorizontalOptions="End" VerticalOptions="Start"
+                 Margin="0,90,30,0" />
+        <Ellipse Fill="{StaticResource MpDuraznoBrush}"
+                 WidthRequest="30" HeightRequest="30"
+                 HorizontalOptions="Start" VerticalOptions="Start"
+                 Margin="30,150,0,0" />
+
+        <ScrollView>
+            <VerticalStackLayout Padding="24,60,24,30" Spacing="0">
+
+                <Image Source="logo_mpacking.png"
+                       HeightRequest="70"
+                       Aspect="AspectFit"
+                       HorizontalOptions="Center"
+                       Margin="0,0,0,24" />
+
+                <Label Text="MPACKING"
+                       FontSize="30"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MpVerdeTitulo}"
+                       HorizontalOptions="Center" />
+
+                <Label Text="Recicla y gana ecopesos"
+                       FontSize="14"
+                       TextColor="{StaticResource MpVerdeEtiqueta}"
+                       HorizontalOptions="Center"
+                       Margin="0,0,0,24" />
+
+                <Border BackgroundColor="White"
+                        Stroke="{StaticResource MpBordeTarjetaBrush}"
+                        StrokeThickness="1.5"
+                        StrokeShape="RoundRectangle 26">
+                    <VerticalStackLayout Padding="20,20,20,20" Spacing="6">
+
+                        <Label Text="Correo"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource MpVerdeEtiqueta}"
+                               FontSize="12" />
+
+                        <Border BackgroundColor="{StaticResource MpFondoCampo}"
+                                Stroke="Transparent"
+                                StrokeShape="RoundRectangle 24"
+                                HeightRequest="48">
+                            <Entry Text="{Binding Correo}"
+                                   Placeholder="tucorreo@ejemplo.com"
+                                   Keyboard="Email"
+                                   FontSize="13"
+                                   TextColor="{StaticResource MpTextoOscuro}"
+                                   PlaceholderColor="{StaticResource MpTextoPlaceholder}"
+                                   VerticalOptions="Center"
+                                   Margin="10,0" />
+                        </Border>
+
+                        <Label Text="Clave"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource MpVerdeEtiqueta}"
+                               FontSize="12"
+                               Margin="0,14,0,0" />
+
+                        <Border BackgroundColor="{StaticResource MpFondoCampo}"
+                                Stroke="Transparent"
+                                StrokeShape="RoundRectangle 24"
+                                HeightRequest="48">
+                            <Entry Text="{Binding Clave}"
+                                   Placeholder="Minimo 8 caracteres"
+                                   IsPassword="True"
+                                   FontSize="13"
+                                   TextColor="{StaticResource MpTextoOscuro}"
+                                   PlaceholderColor="{StaticResource MpTextoPlaceholder}"
+                                   VerticalOptions="Center"
+                                   Margin="10,0" />
+                        </Border>
+
+                        <Label Text="{Binding MensajeError}"
+                               TextColor="{StaticResource MpError}"
+                               FontSize="12"
+                               Margin="0,8,0,0" />
+
+                        <ActivityIndicator IsRunning="{Binding EstaOcupado}"
+                                           IsVisible="{Binding EstaOcupado}"
+                                           Color="{StaticResource MpVerdeBoton}"
+                                           Margin="0,8,0,0" />
+
+                        <Button Text="Entrar"
+                                Command="{Binding IniciarSesionCommand}"
+                                BackgroundColor="{StaticResource MpVerdeBoton}"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                FontSize="16"
+                                CornerRadius="26"
+                                HeightRequest="52"
+                                Margin="0,18,0,0" />
+
+                    </VerticalStackLayout>
+                </Border>
+
+                <Label Text="No tienes cuenta? Registrate"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MpVerdeEtiqueta}"
+                       FontSize="13"
+                       HorizontalOptions="Center"
+                       Margin="0,20,0,0">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding IrARegistroCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Image Source="mascota_mpacking.png"
+                       HeightRequest="180"
+                       Aspect="AspectFit"
+                       HorizontalOptions="Center"
+                       Margin="0,30,0,0" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

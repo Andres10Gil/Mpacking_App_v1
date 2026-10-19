@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MPACKING.App.ViewModels"
+             xmlns:comp="clr-namespace:MPACKING.App.Views.Componentes"
+             x:Class="MPACKING.App.Views.RestaurantePerfilPage"
+             x:DataType="vm:RestaurantePerfilViewModel"
+             BackgroundColor="{StaticResource MpFondoPagina}"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="22,36,22,30" Spacing="0">
+
+                <Label Text="Mi perfil"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource MpVerdeTitulo}"
+                       Margin="0,0,0,18" />
+
+                <Border BackgroundColor="White"
+                        Stroke="{StaticResource MpBordeTarjetaBrush}"
+                        StrokeThickness="1.5"
+                        StrokeShape="RoundRectangle 22">
+                    <VerticalStackLayout Padding="20,18" Spacing="4">
+                        <Label Text="{Binding Nombre}" FontSize="17" FontAttributes="Bold"
+                               TextColor="{StaticResource MpVerdeTitulo}" />
+                        <Label Text="{Binding Direccion}" FontSize="12"
+                               TextColor="{StaticResource MpTextoPlaceholder}" />
+                        <Label Text="{Binding Correo}" FontSize="12"
+                               TextColor="{StaticResource MpTextoPlaceholder}" Margin="0,4,0,0" />
+                        <Label Text="Restaurante" FontSize="11" FontAttributes="Bold"
+                               TextColor="{StaticResource MpVerdeEtiqueta}" Margin="0,4,0,0" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border BackgroundColor="White"
+                        Stroke="{StaticResource MpBordeTarjetaBrush}"
+                        StrokeThickness="1.5"
+                        StrokeShape="RoundRectangle 22"
+                        Margin="0,16,0,0">
+                    <VerticalStackLayout Padding="4,4">
+                        <Grid Padding="16,16">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CerrarSesionCommand}" />
+                            </Grid.GestureRecognizers>
+                            <Label Text="Cerrar sesion" FontSize="14" FontAttributes="Bold"
+                                   TextColor="{StaticResource MpError}" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Label Text="{Binding MensajeError}"
+                       TextColor="{StaticResource MpError}"
+                       FontSize="12"
+                       Margin="0,12,0,0" />
+
+                <ActivityIndicator IsRunning="{Binding EstaOcupado}"
+                                   IsVisible="{Binding EstaOcupado}"
+                                   Color="{StaticResource MpVerdeBoton}"
+                                   Margin="0,12,0,0" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <comp:BarraInferiorRestaurante Grid.Row="1"
+                                        TabActiva="Perfil"
+                                        ComandoInicio="{Binding VolverCommand}"
+                                        ComandoBeneficios="{Binding IrABeneficiosCommand}"
+                                        ComandoHistorial="{Binding IrAHistorialCommand}"
+                                        ComandoPerfil="{Binding CargarCommand}" />
+
+    </Grid>
+</ContentPage>

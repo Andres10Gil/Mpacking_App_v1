@@ -19,7 +19,7 @@ public class PasswordHasher : IPasswordHasher
         {
             return BCrypt.Net.BCrypt.Verify(password, hash);
         }
-        catch (BCrypt.Net.SaltParseException)
+        catch (Exception ex) when (ex is BCrypt.Net.SaltParseException or ArgumentOutOfRangeException)
         {
             // Hash con formato inválido (por ejemplo los placeholder de los datos iniciales)
             return false;

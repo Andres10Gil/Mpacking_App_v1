@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MPACKING.App.ViewModels"
+             xmlns:comp="clr-namespace:MPACKING.App.Views.Componentes"
+             x:Class="MPACKING.App.Views.MapaPage"
+             x:DataType="vm:MapaViewModel"
+             BackgroundColor="{StaticResource MpFondoPagina}"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0">
+            <Grid>
+
+                <Border BackgroundColor="{StaticResource MpFondoCampo}"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 0,0,26,26"
+                        HeightRequest="148"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Fill" />
+
+                <VerticalStackLayout Padding="22,36,22,30" Spacing="0">
+
+                    <Label Text="Mapa"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource MpVerdeTitulo}" />
+                    <Label Text="Restaurantes y recicladores"
+                           FontSize="13"
+                           TextColor="{StaticResource MpVerdeEtiqueta}"
+                           Margin="0,4,0,20" />
+
+                    <!-- Area de mapa (esquematica, todavia sin un mapa real conectado) -->
+                    <Border BackgroundColor="{StaticResource MpFondoCampo}"
+                            Stroke="Transparent"
+                            StrokeShape="RoundRectangle 26"
+                            HeightRequest="280">
+                        <Grid>
+                            <BoxView Color="{StaticResource MpDivisor}" HeightRequest="14"
+                                     VerticalOptions="Start" Margin="0,100,0,0" />
+                            <BoxView Color="{StaticResource MpDivisor}" HeightRequest="10"
+                                     VerticalOptions="Start" Margin="0,190,0,0" />
+                            <BoxView Color="{StaticResource MpDivisor}" WidthRequest="14"
+                                     HorizontalOptions="Center" />
+
+                            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="4">
+                                <Border BackgroundColor="White" Stroke="{StaticResource MpVerdeBoton}"
+                                        StrokeThickness="4" StrokeShape="RoundRectangle 22"
+                                        WidthRequest="44" HeightRequest="44" Padding="0">
+                                    <Ellipse Fill="{StaticResource MpVerdeBoton}" WidthRequest="16" HeightRequest="16"
+                                             HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Border>
+                                <Label Text="Tu" FontSize="10" FontAttributes="Bold"
+                                       TextColor="{StaticResource MpVerdeEtiqueta}" HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+
+                            <Border BackgroundColor="White" Stroke="{StaticResource MpVerdeAcentoBrush}"
+                                    StrokeThickness="3" StrokeShape="RoundRectangle 17"
+                                    WidthRequest="34" HeightRequest="34" Padding="0"
+                                    HorizontalOptions="End" VerticalOptions="Start" Margin="0,50,60,0">
+                                <Ellipse Fill="{StaticResource MpVerdeAcentoBrush}" WidthRequest="14" HeightRequest="14"
+                                         HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Border>
+
+                            <Border BackgroundColor="White" Stroke="{StaticResource MpVerdeAcentoBrush}"
+                                    StrokeThickness="3" StrokeShape="RoundRectangle 17"
+                                    WidthRequest="34" HeightRequest="34" Padding="0"
+                                    HorizontalOptions="End" VerticalOptions="End" Margin="0,0,80,50">
+                                <Ellipse Fill="{StaticResource MpVerdeAcentoBrush}" WidthRequest="14" HeightRequest="14"
+                                         HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Border>
+
+                            <Border BackgroundColor="White" Stroke="{StaticResource MpDuraznoBrush}"
+                                    StrokeThickness="3" StrokeShape="RoundRectangle 17"
+                                    WidthRequest="34" HeightRequest="34" Padding="0"
+                                    HorizontalOptions="Start" VerticalOptions="Center" Margin="34,0,0,40">
+                                <Ellipse Fill="#E8735E" WidthRequest="14" HeightRequest="14"
+                                         HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <Label Text="Bogota, Colombia"
+                           FontSize="11"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource MpVerdeEtiqueta}"
+                           Margin="0,10,0,0" />
+
+                    <!-- Restaurante mas cercano -->
+                    <Border BackgroundColor="White"
+                            Stroke="{StaticResource MpBordeTarjetaBrush}"
+                            StrokeThickness="1.5"
+                            StrokeShape="RoundRectangle 22"
+                            Margin="0,10,0,0"
+                            IsVisible="{Binding HayRestauranteCercano}">
+                        <Grid Padding="20,14" ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Grid.Column="0" Spacing="2">
+                                <Label Text="Mas cercano" FontSize="11"
+                                       TextColor="{StaticResource MpTextoPlaceholder}" />
+                                <Label Text="{Binding NombreMasCercano}" FontSize="16"
+                                       FontAttributes="Bold" TextColor="{StaticResource MpVerdeTitulo}" />
+                                <Label Text="{Binding DetalleMasCercano}" FontSize="11"
+                                       TextColor="{StaticResource MpTextoPlaceholder}" />
+                            </VerticalStackLayout>
+                            <Border Grid.Column="1" BackgroundColor="{StaticResource MpVerdeBoton}"
+                                    Stroke="Transparent" StrokeShape="RoundRectangle 17"
+                                    VerticalOptions="Center" Padding="18,8">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding VerBeneficiosCommand}" />
+                                </Border.GestureRecognizers>
+                                <Label Text="Ver" FontSize="12" FontAttributes="Bold" TextColor="White" />
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <!-- Reciclador en ruta (solo si hay uno activo ahora mismo) -->
+                    <Border BackgroundColor="White"
+                            Stroke="{StaticResource MpBordeTarjetaBrush}"
+                            StrokeThickness="1.5"
+                            StrokeShape="RoundRectangle 22"
+                            Margin="0,12,0,0"
+                            IsVisible="{Binding HayRecicladorEnRuta}">
+                        <VerticalStackLayout Padding="20,16" Spacing="8">
+                            <Label Text="Reciclador en camino" FontSize="12" FontAttributes="Bold"
+                                   TextColor="{StaticResource MpVerdeTitulo}" />
+                            <ProgressBar Progress="0.75"
+                                         ProgressColor="{StaticResource MpVerdeAcento}"
+                                         BackgroundColor="{StaticResource MpDivisor}"
+                                         HeightRequest="10" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Label Text="{Binding MensajeError}"
+                           TextColor="{StaticResource MpError}"
+                           FontSize="12"
+                           Margin="0,12,0,0" />
+
+                    <ActivityIndicator IsRunning="{Binding EstaOcupado}"
+                                       IsVisible="{Binding EstaOcupado}"
+                                       Color="{StaticResource MpVerdeBoton}"
+                                       Margin="0,12,0,0" />
+
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+
+        <comp:BarraInferior Grid.Row="1"
+                             TabActiva="Mapa"
+                             ComandoInicio="{Binding VolverCommand}"
+                             ComandoEscanear="{Binding IrEscanearCommand}"
+                             ComandoMapa="{Binding CargarCommand}"
+                             ComandoBilletera="{Binding IrBilleteraCommand}"
+                             ComandoPerfil="{Binding IrPerfilCommand}" />
+
+    </Grid>
+</ContentPage>

@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using MPACKING.Application.Common.Interfaces;
+using MPACKING.Application.Modules.Admin;
 using MPACKING.Domain.Entities;
+using MPACKING.Domain.Enums;
 
 namespace MPACKING.Infrastructure.Persistence.Repositories;
 
@@ -92,6 +94,32 @@ public class TransaccionRepository : ITransaccionRepository
         await _db.Transacciones
             .Where(t => t.IdUsuario == idUsuario)
             .SumAsync(t => (decimal?)t.PesoKg, ct) ?? 0m;
+
+    public async Task<IReadOnlyList<Transaccion>> ListarPorRecicladorAsync(
+        int idReciclador, int cantidad, CancellationToken ct = default) =>
+        await _db.Transacciones
+            .AsNoTracking()
+            .Include(t => t.Usuario)
+            .Include(t => t.Qr).ThenInclude(q => q.Material)
+            .Where(t => t.IdReciclador == idReciclador)
+            .OrderByDescending(t => t.Fecha)
+            .Take(cantidad)
+            .ToListAsync(ct);
+
+    public async Task<decimal> SumarKgPorRecicladorDesdeAsync(
+        int idReciclador, DateTime desde, CancellationToken ct = default) =>
+        await _db.Transacciones
+            .Where(t => t.IdReciclador == idReciclador && t.Fecha >= desde)
+            .SumAsync(t => (decimal?)t.PesoKg, ct) ?? 0m;
+}
+
+public class RecicladorRepository : IRecicladorRepository
+{
+    private readonly MpackingDbContext _db;
+    public RecicladorRepository(MpackingDbContext db) => _db = db;
+
+    public Task<Reciclador?> ObtenerPorIdUsuarioAsync(int idUsuario, CancellationToken ct = default) =>
+        _db.Recicladores.FirstOrDefaultAsync(r => r.IdUsuario == idUsuario, ct);
 }
 
 public class MaterialRepository : IMaterialRepository
@@ -121,6 +149,9 @@ public class RestauranteRepository : IRestauranteRepository
             .Include(r => r.Beneficios)
             .FirstOrDefaultAsync(r => r.IdRestaurante == id, ct);
 
+    public Task<Restaurante?> ObtenerPorIdUsuarioAsync(int idUsuario, CancellationToken ct = default) =>
+        _db.Restaurantes.FirstOrDefaultAsync(r => r.IdUsuario == idUsuario, ct);
+
     public async Task<IReadOnlyList<Restaurante>> ListarActivosAsync(
         CancellationToken ct = default) =>
         await _db.Restaurantes
@@ -147,6 +178,16 @@ public class BeneficioRepository : IBeneficioRepository
             .Where(b => b.IdRestaurante == idRestaurante && b.Activo)
             .OrderBy(b => b.EcopesosCosto)
             .ToListAsync(ct);
+
+    public async Task<IReadOnlyList<Beneficio>> ListarTodosPorRestauranteAsync(
+        int idRestaurante, CancellationToken ct = default) =>
+        await _db.Beneficios
+            .Where(b => b.IdRestaurante == idRestaurante)
+            .OrderBy(b => b.EcopesosCosto)
+            .ToListAsync(ct);
+
+    public async Task AgregarAsync(Beneficio beneficio, CancellationToken ct = default) =>
+        await _db.Beneficios.AddAsync(beneficio, ct);
 }
 
 public class RedencionRepository : IRedencionRepository
@@ -175,6 +216,17 @@ public class RedencionRepository : IRedencionRepository
             .Where(r => r.IdUsuario == idUsuario)
             .OrderByDescending(r => r.FechaSolicitud)
             .ToListAsync(ct);
+
+    public async Task<IReadOnlyList<Redencion>> ListarPorRestauranteAsync(
+        int idRestaurante, int cantidad, CancellationToken ct = default) =>
+        await _db.Redenciones
+            .AsNoTracking()
+            .Include(r => r.Usuario)
+            .Include(r => r.Beneficio)
+            .Where(r => r.Beneficio.IdRestaurante == idRestaurante)
+            .OrderByDescending(r => r.FechaSolicitud)
+            .Take(cantidad)
+            .ToListAsync(ct);
 }
 
 public class PagoRepository : IPagoRepository
@@ -187,6 +239,37 @@ public class PagoRepository : IPagoRepository
 
     public Task<Pago?> ObtenerPorRedencionAsync(int idRedencion, CancellationToken ct = default) =>
         _db.Pagos.FirstOrDefaultAsync(p => p.IdRedencion == idRedencion, ct);
+
+    public async Task<IReadOnlyList<Pago>> ListarPorRestauranteAsync(
+        int idRestaurante, int cantidad, CancellationToken ct = default) =>
+        await _db.Pagos
+            .AsNoTracking()
+            .Include(p => p.Redencion).ThenInclude(r => r.Usuario)
+            .Include(p => p.Redencion).ThenInclude(r => r.Beneficio)
+            .Where(p => p.Redencion.Beneficio.IdRestaurante == idRestaurante)
+            .OrderByDescending(p => p.FechaPago)
+            .Take(cantidad)
+            .ToListAsync(ct);
+
+    public async Task<decimal> SumarMontoNetoDesdeAsync(
+        int idRestaurante, DateTime desde, CancellationToken ct = default) =>
+        await _db.Pagos
+            .Where(p => p.Redencion.Beneficio.IdRestaurante == idRestaurante &&
+                        p.Estado == EstadoPago.Aprobado && p.FechaPago >= desde)
+            .SumAsync(p => (decimal?)p.MontoNeto, ct) ?? 0m;
+
+    public Task<int> ContarAprobadosDesdeAsync(
+        int idRestaurante, DateTime desde, CancellationToken ct = default) =>
+        _db.Pagos.CountAsync(p =>
+            p.Redencion.Beneficio.IdRestaurante == idRestaurante &&
+            p.Estado == EstadoPago.Aprobado && p.FechaPago >= desde, ct);
+
+    public async Task<int> SumarEcopesosValidadosDesdeAsync(
+        int idRestaurante, DateTime desde, CancellationToken ct = default) =>
+        await _db.Pagos
+            .Where(p => p.Redencion.Beneficio.IdRestaurante == idRestaurante &&
+                        p.Estado == EstadoPago.Aprobado && p.FechaPago >= desde)
+            .SumAsync(p => (int?)p.Redencion.EcopesosUsados, ct) ?? 0;
 }
 
 public class UbicacionRepository : IUbicacionRepository
@@ -216,6 +299,72 @@ public class GuiaLimpiezaRepository : IGuiaLimpiezaRepository
         _db.GuiasLimpieza
             .Include(g => g.Material)
             .FirstOrDefaultAsync(g => g.IdMaterial == idMaterial && g.Activo, ct);
+}
+
+public class AdminRepository : IAdminRepository
+{
+    private readonly MpackingDbContext _db;
+    public AdminRepository(MpackingDbContext db) => _db = db;
+
+    public Task<int> ContarUsuariosActivosAsync(CancellationToken ct = default) =>
+        _db.Usuarios.CountAsync(u => u.Rol == RolUsuario.Usuario && u.Activo, ct);
+
+    public Task<int> ContarTransaccionesAsync(CancellationToken ct = default) =>
+        _db.Transacciones.CountAsync(ct);
+
+    public Task<int> SumarEcopesosDadosAsync(CancellationToken ct = default) =>
+        _db.Transacciones.SumAsync(t => t.EcopesosGanados, ct);
+
+    public async Task<decimal> SumarKgRecicladosAsync(CancellationToken ct = default) =>
+        await _db.Transacciones.SumAsync(t => (decimal?)t.PesoKg, ct) ?? 0m;
+
+    public async Task<decimal> SumarKgRecicladosEnMesAsync(
+        int anio, int mes, CancellationToken ct = default) =>
+        await _db.Transacciones
+            .Where(t => t.Fecha.Year == anio && t.Fecha.Month == mes)
+            .SumAsync(t => (decimal?)t.PesoKg, ct) ?? 0m;
+
+    public async Task<IReadOnlyList<Usuario>> ListarUsuariosAsync(
+        string? busqueda, int pagina, int tamano, CancellationToken ct = default)
+    {
+        var query = _db.Usuarios.AsNoTracking().AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(busqueda))
+        {
+            var texto = busqueda.Trim().ToLower();
+            query = query.Where(u =>
+                u.Nombre.ToLower().Contains(texto) || u.Correo.Contains(texto));
+        }
+
+        return await query
+            .OrderBy(u => u.IdUsuario)
+            .Skip((pagina - 1) * tamano)
+            .Take(tamano)
+            .ToListAsync(ct);
+    }
+
+    public async Task<IReadOnlyList<Redencion>> ListarRedencionesPendientesAsync(
+        int cantidad, CancellationToken ct = default) =>
+        await _db.Redenciones
+            .AsNoTracking()
+            .Include(r => r.Usuario)
+            .Include(r => r.Beneficio)
+            .Where(r => r.Estado == EstadoRedencion.Pendiente)
+            .OrderByDescending(r => r.FechaSolicitud)
+            .Take(cantidad)
+            .ToListAsync(ct);
+
+    public async Task<IReadOnlyList<MaterialTotalDato>> TotalesPorMaterialAsync(
+        CancellationToken ct = default) =>
+        await _db.Transacciones
+            .AsNoTracking()
+            .GroupBy(t => t.Qr.Material.Nombre)
+            .Select(g => new MaterialTotalDato(
+                g.Key,
+                g.Sum(t => t.PesoKg),
+                g.Sum(t => t.EcopesosGanados),
+                g.Sum(t => t.PesoKg * t.Qr.Material.ReduccionCo2Kg)))
+            .ToListAsync(ct);
 }
 
 public class UnitOfWork : IUnitOfWork

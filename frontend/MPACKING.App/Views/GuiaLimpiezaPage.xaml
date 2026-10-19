@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MPACKING.App.ViewModels"
+             xmlns:comp="clr-namespace:MPACKING.App.Views.Componentes"
+             x:Class="MPACKING.App.Views.GuiaLimpiezaPage"
+             x:DataType="vm:GuiaLimpiezaViewModel"
+             BackgroundColor="{StaticResource MpFondoPagina}"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0">
+            <Grid>
+
+                <Border BackgroundColor="{StaticResource MpFondoCampo}"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 0,0,26,26"
+                        HeightRequest="148"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Fill" />
+
+                <VerticalStackLayout Padding="22,36,22,30" Spacing="0">
+
+                    <Label Text="Guia de limpieza"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource MpVerdeTitulo}" />
+                    <Label Text="{Binding NombreMaterial}"
+                           FontSize="13"
+                           TextColor="{StaticResource MpVerdeEtiqueta}"
+                           Margin="0,4,0,20" />
+
+                    <!-- Como limpiarla -->
+                    <Border BackgroundColor="White"
+                            Stroke="{StaticResource MpBordeTarjetaBrush}"
+                            StrokeThickness="1.5"
+                            StrokeShape="RoundRectangle 22">
+                        <VerticalStackLayout Padding="20,16" Spacing="4">
+                            <Label Text="Como limpiarla" FontSize="15" FontAttributes="Bold"
+                                   TextColor="{StaticResource MpVerdeTitulo}" Margin="0,0,0,6" />
+
+                            <CollectionView ItemsSource="{Binding Pasos}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="vm:PasoVm">
+                                        <Grid Padding="0,8" ColumnDefinitions="28,*" ColumnSpacing="12">
+                                            <Border Grid.Column="0" BackgroundColor="{StaticResource MpFondoCampo}"
+                                                    Stroke="Transparent" StrokeShape="RoundRectangle 14"
+                                                    WidthRequest="28" HeightRequest="28" Padding="0"
+                                                    VerticalOptions="Start">
+                                                <Label Text="{Binding Numero}" FontSize="13" FontAttributes="Bold"
+                                                       TextColor="{StaticResource MpVerdeEtiqueta}"
+                                                       HorizontalOptions="Center" VerticalOptions="Center" />
+                                            </Border>
+                                            <Label Grid.Column="1" Text="{Binding Texto}" FontSize="13"
+                                                   TextColor="{StaticResource MpTextoOscuro}"
+                                                   VerticalOptions="Center" LineBreakMode="WordWrap" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- No la recibimos si... -->
+                    <Border BackgroundColor="{StaticResource MpRosadoBrush}"
+                            Stroke="Transparent"
+                            StrokeShape="RoundRectangle 22"
+                            Margin="0,16,0,0"
+                            IsVisible="{Binding HayErrores}">
+                        <VerticalStackLayout Padding="20,14" Spacing="6">
+                            <Label Text="No la recibimos si..." FontSize="13" FontAttributes="Bold"
+                                   TextColor="{StaticResource MpError}" />
+                            <CollectionView ItemsSource="{Binding Errores}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="x:String">
+                                        <Label Text="{Binding .}" FontSize="12"
+                                               TextColor="{StaticResource MpError}" Margin="0,2" />
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Dato curioso -->
+                    <Border BackgroundColor="White"
+                            Stroke="{StaticResource MpBordeTarjetaBrush}"
+                            StrokeThickness="1.5"
+                            StrokeShape="RoundRectangle 22"
+                            Margin="0,16,0,0"
+                            IsVisible="{Binding HayDatoCurioso}">
+                        <Label Text="{Binding DatoCurioso}"
+                               Padding="20,14"
+                               FontSize="12"
+                               TextColor="{StaticResource MpVerdeEtiqueta}" />
+                    </Border>
+
+                    <Label Text="{Binding MensajeError}"
+                           TextColor="{StaticResource MpError}"
+                           FontSize="12"
+                           Margin="0,12,0,0" />
+
+                    <ActivityIndicator IsRunning="{Binding EstaOcupado}"
+                                       IsVisible="{Binding EstaOcupado}"
+                                       Color="{StaticResource MpVerdeBoton}"
+                                       Margin="0,12,0,0" />
+
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+
+        <comp:BarraInferior Grid.Row="1" TabActiva="Perfil" ComandoPerfil="{Binding VolverCommand}" />
+
+    </Grid>
+</ContentPage>

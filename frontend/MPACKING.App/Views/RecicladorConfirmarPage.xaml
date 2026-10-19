@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MPACKING.App.ViewModels"
+             xmlns:comp="clr-namespace:MPACKING.App.Views.Componentes"
+             x:Class="MPACKING.App.Views.RecicladorConfirmarPage"
+             x:DataType="vm:RecicladorConfirmarViewModel"
+             BackgroundColor="{StaticResource MpFondoPagina}"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0">
+            <Grid>
+
+                <Border BackgroundColor="{StaticResource MpFondoCampo}"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 0,0,26,26"
+                        HeightRequest="148"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Fill" />
+
+                <VerticalStackLayout Padding="22,36,22,30" Spacing="0">
+
+                    <Label Text="Confirmar material"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource MpVerdeTitulo}" />
+                    <Label Text="Pide el codigo del QR al cliente"
+                           FontSize="13"
+                           TextColor="{StaticResource MpVerdeEtiqueta}"
+                           Margin="0,4,0,24" />
+
+                    <Border BackgroundColor="{StaticResource MpFondoCampo}"
+                            Stroke="Transparent"
+                            StrokeShape="RoundRectangle 28"
+                            HeightRequest="220">
+                        <Grid>
+                            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="14">
+                                <Border BackgroundColor="White"
+                                        Stroke="Transparent"
+                                        StrokeShape="RoundRectangle 18"
+                                        WidthRequest="90"
+                                        HeightRequest="90"
+                                        Padding="0">
+                                    <Grid HorizontalOptions="Center" VerticalOptions="Center"
+                                          ColumnDefinitions="22,6,22" RowDefinitions="22,6,22"
+                                          WidthRequest="50" HeightRequest="50">
+                                        <BoxView Grid.Row="0" Grid.Column="0" Color="{StaticResource MpVerdeTitulo}" CornerRadius="6" />
+                                        <BoxView Grid.Row="0" Grid.Column="2" Color="{StaticResource MpVerdeTitulo}" CornerRadius="6" />
+                                        <BoxView Grid.Row="2" Grid.Column="0" Color="{StaticResource MpVerdeTitulo}" CornerRadius="6" />
+                                        <BoxView Grid.Row="2" Grid.Column="2" Color="{StaticResource MpVerdeTitulo}" CornerRadius="8" />
+                                    </Grid>
+                                </Border>
+                                <Label Text="Tocar para escribir el codigo"
+                                       FontSize="12"
+                                       TextColor="{StaticResource MpVerdeEtiqueta}"
+                                       HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </Grid>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EscanearCommand}" />
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <Border BackgroundColor="White"
+                            Stroke="{StaticResource MpBordeTarjetaBrush}"
+                            StrokeThickness="1.5"
+                            StrokeShape="RoundRectangle 22"
+                            Margin="0,16,0,0"
+                            IsVisible="{Binding HayQrConsultado}">
+                        <VerticalStackLayout Padding="20,16" Spacing="4">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <VerticalStackLayout Grid.Column="0">
+                                    <Label Text="Material detectado" FontSize="11"
+                                           TextColor="{StaticResource MpTextoPlaceholder}" />
+                                    <Label Text="{Binding Material}" FontSize="19" FontAttributes="Bold"
+                                           TextColor="{StaticResource MpVerdeTitulo}" />
+                                    <Label Text="{Binding PesoTexto}" FontSize="12"
+                                           TextColor="{StaticResource MpTextoPlaceholder}" Margin="0,4,0,0" />
+                                </VerticalStackLayout>
+                                <Border Grid.Column="1" BackgroundColor="{StaticResource MpFondoCampo}"
+                                        Stroke="Transparent" StrokeShape="RoundRectangle 14"
+                                        VerticalOptions="Start" Padding="14,6">
+                                    <Label Text="{Binding EstadoTexto}" FontSize="10" FontAttributes="Bold"
+                                           TextColor="{StaticResource MpVerdeEtiqueta}" />
+                                </Border>
+                            </Grid>
+
+                            <Grid ColumnDefinitions="*,Auto" Margin="0,10,0,0">
+                                <Label Grid.Column="0" Text="Ecopesos a otorgar" FontSize="11"
+                                       TextColor="{StaticResource MpTextoPlaceholder}" VerticalOptions="Center" />
+                                <Label Grid.Column="1" Text="{Binding EcopesosTexto}" FontSize="14"
+                                       FontAttributes="Bold" TextColor="{StaticResource MpVerdeEtiqueta}" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Label Text="{Binding MensajeError}"
+                           TextColor="{StaticResource MpError}"
+                           FontSize="12"
+                           Margin="0,12,0,0" />
+
+                    <ActivityIndicator IsRunning="{Binding EstaOcupado}"
+                                       IsVisible="{Binding EstaOcupado}"
+                                       Color="{StaticResource MpVerdeBoton}"
+                                       Margin="0,12,0,0" />
+
+                    <Button Text="Confirmar recoleccion"
+                            Command="{Binding ConfirmarRecoleccionCommand}"
+                            IsVisible="{Binding HayQrConsultado}"
+                            BackgroundColor="{StaticResource MpVerdeBoton}"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            CornerRadius="27"
+                            HeightRequest="54"
+                            Margin="0,16,0,0" />
+
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+
+        <comp:BarraInferiorReciclador Grid.Row="1"
+                                       TabActiva="Confirmar"
+                                       ComandoRuta="{Binding VolverCommand}"
+                                       ComandoConfirmar="{Binding EscanearCommand}"
+                                       ComandoHistorial="{Binding IrAHistorialCommand}"
+                                       ComandoPerfil="{Binding IrAPerfilCommand}" />
+
+    </Grid>
+</ContentPage>

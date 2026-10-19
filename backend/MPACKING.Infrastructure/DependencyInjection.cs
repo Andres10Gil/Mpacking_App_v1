@@ -33,6 +33,8 @@ public static class DependencyInjection
         services.AddScoped<IPagoRepository, PagoRepository>();
         services.AddScoped<IUbicacionRepository, UbicacionRepository>();
         services.AddScoped<IGuiaLimpiezaRepository, GuiaLimpiezaRepository>();
+        services.AddScoped<IAdminRepository, AdminRepository>();
+        services.AddScoped<IRecicladorRepository, RecicladorRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         // Seguridad
